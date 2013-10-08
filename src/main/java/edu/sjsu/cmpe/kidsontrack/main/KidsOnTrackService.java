@@ -12,7 +12,7 @@ public class KidsOnTrackService extends Service<KidsOnTrackServiceConfiguration>
     public static void main(String[] args) throws Exception {
 	new KidsOnTrackService().run(args);
     }
-
+//.........
 
     public void initialize(Bootstrap<KidsOnTrackServiceConfiguration> bootstrap) {
 	bootstrap.setName("kidsontrack-service");
