@@ -1,4 +1,4 @@
-package edu.sjsu.cmpe.kidsontrack.dao.usermgnt;
+package edu.sjsu.cmpe.kidsontrack.dao;
 
 import java.util.List;
 
