@@ -36,7 +36,7 @@ public class KidsOnTrackService extends
 		/** Course API */
 		environment.addResource(CourseResource.class);
 
-		/* GUI Side */
+		/** GUI Side */
 		environment.addResource(ExampleResource.class);
 		environment.addResource(WelcomeResource.class);
 	}
