@@ -21,14 +21,14 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/signup")
-public class UserProfileController {
+public class SignupController {
 
     @Autowired
     private UserMgntService securityService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getUserProfile(ModelMap model) {
-        return "userProfile";
+        return "signup";
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = {
@@ -51,7 +51,7 @@ public class UserProfileController {
     public View deleteUser(@PathVariable String id, ModelMap model) {
         try {
         securityService.deleteUser(id);
-        return new RedirectView("/kidsontrack/userProfile");
+        return new RedirectView("/kidsontrack/signup");
     }
 
     catch(Exception e){

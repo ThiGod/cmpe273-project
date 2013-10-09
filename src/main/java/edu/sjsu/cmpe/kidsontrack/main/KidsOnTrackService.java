@@ -7,6 +7,9 @@ import com.yammer.dropwizard.views.*;
 
 import edu.sjsu.cmpe.kidsontrack.config.KidsOnTrackServiceConfiguration;
 import edu.sjsu.cmpe.kidsontrack.controller.usermgnt.LoginController;
+import edu.sjsu.cmpe.kidsontrack.controller.usermgnt.MainpageController;
+import edu.sjsu.cmpe.kidsontrack.controller.usermgnt.SignupController;
+import edu.sjsu.cmpe.kidsontrack.resources.ExampleResource;
 
 public class KidsOnTrackService extends Service<KidsOnTrackServiceConfiguration> {
 
@@ -25,6 +28,9 @@ public class KidsOnTrackService extends Service<KidsOnTrackServiceConfiguration>
 	    Environment environment) throws Exception {
 	/** Root API */
 	environment.addResource(LoginController.class);
+	environment.addResource(MainpageController.class);
+	environment.addResource(SignupController.class);
+	//environment.addResource(ExampleResource.class);
 
     }
 }
