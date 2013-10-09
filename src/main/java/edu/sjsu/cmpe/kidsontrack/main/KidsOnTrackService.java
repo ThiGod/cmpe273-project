@@ -3,6 +3,7 @@ package edu.sjsu.cmpe.kidsontrack.main;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
+import com.yammer.dropwizard.views.*;
 
 import edu.sjsu.cmpe.kidsontrack.config.KidsOnTrackServiceConfiguration;
 import edu.sjsu.cmpe.kidsontrack.controller.usermgnt.LoginController;
@@ -15,7 +16,8 @@ public class KidsOnTrackService extends Service<KidsOnTrackServiceConfiguration>
 
 
     public void initialize(Bootstrap<KidsOnTrackServiceConfiguration> bootstrap) {
-	bootstrap.setName("kidsontrack-service");
+    	bootstrap.setName("kidsontrack-service");
+    	bootstrap.addBundle(new ViewBundle());
     }
 
   

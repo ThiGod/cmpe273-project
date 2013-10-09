@@ -20,7 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 
 @Controller
-@RequestMapping("/userProfile")
+@RequestMapping("/signup")
 public class UserProfileController {
 
     @Autowired
