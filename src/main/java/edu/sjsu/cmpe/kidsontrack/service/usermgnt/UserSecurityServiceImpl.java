@@ -3,7 +3,7 @@
  */
 package edu.sjsu.cmpe.kidsontrack.service.usermgnt;
 
-import edu.sjsu.cmpe.kidsontrack.dao.UserMgntDao;
+import edu.sjsu.cmpe.kidsontrack.dao.usermgnt.UserMgntDao;
 import edu.sjsu.cmpe.kidsontrack.dto.usermgnt.UserDto;
 import edu.sjsu.cmpe.kidsontrack.exception.UserManagmentException;
 import edu.sjsu.cmpe.kidsontrack.model.usermgnt.User;

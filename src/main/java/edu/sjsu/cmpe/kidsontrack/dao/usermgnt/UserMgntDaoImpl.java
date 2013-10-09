@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.sjsu.cmpe.kidsontrack.dao;
+package edu.sjsu.cmpe.kidsontrack.dao.usermgnt;
 
 import edu.sjsu.cmpe.kidsontrack.dto.usermgnt.UserDto;
 import edu.sjsu.cmpe.kidsontrack.exception.UserManagmentException;
