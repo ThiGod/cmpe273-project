@@ -5,7 +5,9 @@ import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.views.*;
 
+import edu.sjsu.cmpe.kidsontrack.api.resources.CourseResource;
 import edu.sjsu.cmpe.kidsontrack.api.resources.RootResource;
+import edu.sjsu.cmpe.kidsontrack.api.resources.StudentResource;
 import edu.sjsu.cmpe.kidsontrack.api.resources.TeacherResource;
 import edu.sjsu.cmpe.kidsontrack.config.KidsOnTrackServiceConfiguration;
 
@@ -27,6 +29,10 @@ public class KidsOnTrackService extends
 		environment.addResource(RootResource.class);
 		/** Teacher API */
 		environment.addResource(TeacherResource.class);
+		/** Student API */
+		environment.addResource(StudentResource.class);
+		/** Course API */
+		environment.addResource(CourseResource.class);
 
 	}
 }

@@ -10,7 +10,7 @@ import edu.sjsu.cmpe.kidsontrack.domain.Course;
  * 
  */
 public class CoursesDto {
-	private List<Course> reviews = new ArrayList<Course>();
+	private List<Course> courses = new ArrayList<Course>();
 
 	private List<LinkDto> links = new ArrayList<LinkDto>();
 
@@ -33,12 +33,12 @@ public class CoursesDto {
 		this.links = links;
 	}
 
-	public List<Course> getReviews() {
-		return reviews;
+	public List<Course> getCourses() {
+		return courses;
 	}
 
-	public void setReviews(List<Course> reviews) {
-		this.reviews = reviews;
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
 	}
 
 
