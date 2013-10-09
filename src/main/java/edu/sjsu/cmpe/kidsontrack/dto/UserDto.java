@@ -1,8 +1,8 @@
-package edu.sjsu.cmpe.kidsontrack.dto.usermgnt;
+package edu.sjsu.cmpe.kidsontrack.dto;
 
 import java.io.Serializable;
 
-import edu.sjsu.cmpe.kidsontrack.model.usermgnt.User;
+import edu.sjsu.cmpe.kidsontrack.domain.User;
 
 /**
  * @author Lei Zhang

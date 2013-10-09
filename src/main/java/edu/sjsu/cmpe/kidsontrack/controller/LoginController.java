@@ -1,13 +1,12 @@
-package edu.sjsu.cmpe.kidsontrack.controller.usermgnt;
+package edu.sjsu.cmpe.kidsontrack.controller;
 
 /**
  * Author: Lei Zhang
  */
-import edu.sjsu.cmpe.kidsontrack.dto.usermgnt.UserDto;
+import edu.sjsu.cmpe.kidsontrack.domain.UserCredential;
+import edu.sjsu.cmpe.kidsontrack.dto.UserDto;
 import edu.sjsu.cmpe.kidsontrack.exception.UserManagmentException;
-import edu.sjsu.cmpe.kidsontrack.model.usermgnt.UserCredential;
-import edu.sjsu.cmpe.kidsontrack.service.usermgnt.UserMgntService;
-
+import edu.sjsu.cmpe.kidsontrack.service.UserMgntService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

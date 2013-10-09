@@ -1,12 +1,12 @@
-package edu.sjsu.cmpe.kidsontrack.controller.usermgnt;
+package edu.sjsu.cmpe.kidsontrack.controller;
 
 
 
 /**
  * Author: Lei Zhang
  */
-import edu.sjsu.cmpe.kidsontrack.model.usermgnt.User;
-import edu.sjsu.cmpe.kidsontrack.service.usermgnt.UserMgntService;
+import edu.sjsu.cmpe.kidsontrack.domain.User;
+import edu.sjsu.cmpe.kidsontrack.service.UserMgntService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,14 +21,14 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/signup")
-public class SignupController {
+public class UserProfileController {
 
     @Autowired
     private UserMgntService securityService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getUserProfile(ModelMap model) {
-        return "signup";
+        return "userProfile";
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = {
@@ -51,7 +51,7 @@ public class SignupController {
     public View deleteUser(@PathVariable String id, ModelMap model) {
         try {
         securityService.deleteUser(id);
-        return new RedirectView("/kidsontrack/signup");
+        return new RedirectView("/kidsontrack/userProfile");
     }
 
     catch(Exception e){
