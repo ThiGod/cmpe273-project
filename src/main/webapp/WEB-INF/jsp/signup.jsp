@@ -5,13 +5,21 @@
 
 		<form action="signup" method="post">
 			<input type="hidden" name="id">
-			<label for="name">User Name</label>
-			<input type="text" id="name" name="name"/>
-			<label for="email">User Email</label>
-			<input type="text" id="email" name="email"/>
-			<label for="password">Password</label>
+			<div>
+				<label for="name">User Name</label>
+				<input type="text" id="name" name="name"/>
+			</div>
+				<label for="email">User Email</label>
+				<input type="text" id="email" name="email"/>
+			<div>
+			</div>
+			<div>
+				<label for="password">Password</label>
 			<input type="text" id="password" name="password"/>
-			<input type="submit" value="Submit"/>
+			</div>
+			<div>
+				<input type="submit" value="Submit"/>
+			</div>			
 		</form>
 
 </body>
