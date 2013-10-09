@@ -1,10 +1,10 @@
-package edu.sjsu.cmpe.kidsontrack.dao.usermgnt;
+package edu.sjsu.cmpe.kidsontrack.dao;
 
 import java.util.List;
 
-import edu.sjsu.cmpe.kidsontrack.dto.usermgnt.UserDto;
+import edu.sjsu.cmpe.kidsontrack.domain.User;
+import edu.sjsu.cmpe.kidsontrack.dto.UserDto;
 import edu.sjsu.cmpe.kidsontrack.exception.UserManagmentException;
-import edu.sjsu.cmpe.kidsontrack.model.usermgnt.User;
 
 /**
  * @author Lei Zhang

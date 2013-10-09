@@ -1,4 +1,4 @@
-package edu.sjsu.cmpe.kidsontrack.model.usermgnt;
+package edu.sjsu.cmpe.kidsontrack.domain;
 
 
 /**

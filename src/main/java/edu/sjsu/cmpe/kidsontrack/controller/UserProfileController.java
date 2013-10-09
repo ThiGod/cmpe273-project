@@ -1,12 +1,12 @@
-package edu.sjsu.cmpe.kidsontrack.controller.usermgnt;
+package edu.sjsu.cmpe.kidsontrack.controller;
 
 
 
 /**
  * Author: Lei Zhang
  */
-import edu.sjsu.cmpe.kidsontrack.model.usermgnt.User;
-import edu.sjsu.cmpe.kidsontrack.service.usermgnt.UserMgntService;
+import edu.sjsu.cmpe.kidsontrack.domain.User;
+import edu.sjsu.cmpe.kidsontrack.service.UserMgntService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 
 @Controller
-@RequestMapping("/userProfile")
+@RequestMapping("/signup")
 public class UserProfileController {
 
     @Autowired
