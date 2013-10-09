@@ -32,10 +32,10 @@ public class TeacherMgntDao {
 	{
 		op.save(teacher);
 		
-		Teacher t = op.findById(teacher.get_id(), Teacher.class);
+		Teacher t = op.findById(teacher.getUserId(), Teacher.class);
 			
 		TeacherStudents ts = new TeacherStudents(); 
-		ts.set_id(teacher.get_id());
+		ts.set_id(teacher.getUserId());
 
 		TeacherStudentMgntDao.addUpdate(ts);
 		
@@ -161,7 +161,7 @@ public class TeacherMgntDao {
 	
 	public static boolean isFoundTeacher(Teacher teacher)
 	{
-		return (op.findById(teacher.get_id(), Teacher.class) == null) ? true : false;
+		return (op.findById(teacher.getUserId(), Teacher.class) == null) ? true : false;
 	}
 	
 	

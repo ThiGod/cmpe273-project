@@ -50,12 +50,12 @@ public class TeacherStudentMgntDao {
 	{
 		TeacherStudents record = op.findById(tID, TeacherStudents.class);
 		
-			record.addStudent(std.get_id());
+			record.addStudent(std.getUserId());
 		op.save(record);
 		
 		record = op.findById(tID, TeacherStudents.class);
 				
-		if(op.findById(std.get_id(), Student.class) == null)
+		if(op.findById(std.getUserId(), Student.class) == null)
 		{
 			StudentMgntDao.addStudent(std);
 		}
@@ -83,8 +83,8 @@ public class TeacherStudentMgntDao {
 		
 		for(Student student: students)
 		{
-			record.addStudent(student.get_id());
-			if(op.findById(student.get_id(), Student.class) == null)
+			record.addStudent(student.getUserId());
+			if(op.findById(student.getUserId(), Student.class) == null)
 			{
 				StudentMgntDao.addStudent(student);
 			}

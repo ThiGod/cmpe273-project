@@ -1,40 +1,5 @@
 package edu.sjsu.cmpe.kidsontrack.domain;
 
-<<<<<<< HEAD
-import edu.sjsu.cmpe.kidsontrack.config.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.data.annotation.Id;
-
-
-public class Teacher extends User{
-	
-	@Id
-	private long _id;
-	private List<Course> courses = new ArrayList<Course>();
-	private static long count = 0;
-	
-	public Teacher()
-	{
-		super();
-		count += 1;
-		_id = count;
-	}
-
-
-	public long get_id() {
-		return _id;
-	}
-
-	
-	public static long getCount()
-	{
-		return count;
-	}
-	
-	
-=======
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,37 +37,29 @@ public class Teacher extends User{
 		this.students = students;
 	}
 
->>>>>>> 61db1f2ba2addf65294a319a15fcd4f9c0a86b55
 	public List<Course> getCourses() {
 		return courses;
 	}
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 61db1f2ba2addf65294a319a15fcd4f9c0a86b55
 	public void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}
 
-	
-<<<<<<< HEAD
-	public void addCourse(Course course)
-	{
-		courses.add(course);
+	public void addCourse(Course course) {
+		this.courses.add(course);
 	}
 	
-	
-	public void removeCourse(Course course)
-	{
-		courses.remove(course);
-		
+	public void removeCourse(Course course) {
+		this.courses.remove(course);
 	}
+
+
+	
 
 	public String toString()
 	{
 		String str = "toString(): \n" + 
-					 "{teacher: \n" + "{_id: " + _id + "\n" +
+					 "{teacher: \n" + "{_id: " + getUserId() + "\n" +
 				"firstName: " + getFirstName() + "\n" +
 				"lastName: " + getLastName() + "\n" +
 				"email: " + getEmail() + "\n";
@@ -113,8 +70,4 @@ public class Teacher extends User{
 		return str;
 				
 	}
-	
-=======
->>>>>>> 61db1f2ba2addf65294a319a15fcd4f9c0a86b55
-
 }
