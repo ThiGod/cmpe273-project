@@ -1,0 +1,70 @@
+WARN  [2013-10-09 22:34:59,763] com.yammer.dropwizard.config.ServerFactory: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS SERVICE HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW IF IT    !
+!    DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE LETTING     !
+!     YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH DEPENDENCY OF     !
+!     YOUR SERVICE WHICH FULLY (BUT LIGHTLY) TESTS YOUR SERVICE'S ABILITY TO   !
+!      USE THAT SERVICE. THINK OF IT AS A CONTINUOUS INTEGRATION TEST.         !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2013-10-09 22:34:59,839] com.yammer.dropwizard.cli.ServerCommand: Starting kidsontrack-service
+INFO  [2013-10-09 22:34:59,842] org.eclipse.jetty.server.Server: jetty-8.1.10.v20130312
+INFO  [2013-10-09 22:34:59,977] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.17.1 02/28/2013 12:47 PM'
+INFO  [2013-10-09 22:35:00,065] com.yammer.dropwizard.config.Environment: The following paths were found for the configured resources:
+
+    GET     /kidsontrack/v1/ (edu.sjsu.cmpe.kidsontrack.api.resources.RootResource)
+    DELETE  /kidsontrack/v1/teachers/{id} (edu.sjsu.cmpe.kidsontrack.api.resources.TeacherResource)
+    GET     /kidsontrack/v1/teachers/{id} (edu.sjsu.cmpe.kidsontrack.api.resources.TeacherResource)
+    POST    /kidsontrack/v1/teachers (edu.sjsu.cmpe.kidsontrack.api.resources.TeacherResource)
+    PUT     /kidsontrack/v1/teachers (edu.sjsu.cmpe.kidsontrack.api.resources.TeacherResource)
+    GET     /kidsontrack/v1/teachers/{teacherId}/students (edu.sjsu.cmpe.kidsontrack.api.resources.StudentResource)
+    GET     /kidsontrack/v1/teachers/{teacherId}/students/{id} (edu.sjsu.cmpe.kidsontrack.api.resources.StudentResource)
+    POST    /kidsontrack/v1/teachers/{teacherId}/students (edu.sjsu.cmpe.kidsontrack.api.resources.StudentResource)
+    GET     /kidsontrack/v1/teachers/{teacherId}/courses (edu.sjsu.cmpe.kidsontrack.api.resources.CourseResource)
+    GET     /kidsontrack/v1/teachers/{teacherId}/courses/{id} (edu.sjsu.cmpe.kidsontrack.api.resources.CourseResource)
+    POST    /kidsontrack/v1/teachers/{teacherId}/courses (edu.sjsu.cmpe.kidsontrack.api.resources.CourseResource)
+    GET     /kidsontrack/kidsontrack/example (edu.sjsu.cmpe.kidsontrack.resources.ExampleResource)
+    GET     /kidsontrack/ (edu.sjsu.cmpe.kidsontrack.resources.WelcomeResource)
+
+INFO  [2013-10-09 22:35:00,065] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2013-10-09 22:35:00,385] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2013-10-09 22:35:00,387] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
+WARN  [2013-10-09 22:37:27,248] com.yammer.dropwizard.config.ServerFactory: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS SERVICE HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW IF IT    !
+!    DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE LETTING     !
+!     YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH DEPENDENCY OF     !
+!     YOUR SERVICE WHICH FULLY (BUT LIGHTLY) TESTS YOUR SERVICE'S ABILITY TO   !
+!      USE THAT SERVICE. THINK OF IT AS A CONTINUOUS INTEGRATION TEST.         !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2013-10-09 22:37:27,321] com.yammer.dropwizard.cli.ServerCommand: Starting kidsontrack-service
+INFO  [2013-10-09 22:37:27,323] org.eclipse.jetty.server.Server: jetty-8.1.10.v20130312
+INFO  [2013-10-09 22:37:27,454] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.17.1 02/28/2013 12:47 PM'
+INFO  [2013-10-09 22:37:27,541] com.yammer.dropwizard.config.Environment: The following paths were found for the configured resources:
+
+    GET     /kidsontrack/v1/ (edu.sjsu.cmpe.kidsontrack.api.resources.RootResource)
+    DELETE  /kidsontrack/v1/teachers/{id} (edu.sjsu.cmpe.kidsontrack.api.resources.TeacherResource)
+    GET     /kidsontrack/v1/teachers/{id} (edu.sjsu.cmpe.kidsontrack.api.resources.TeacherResource)
+    POST    /kidsontrack/v1/teachers (edu.sjsu.cmpe.kidsontrack.api.resources.TeacherResource)
+    PUT     /kidsontrack/v1/teachers (edu.sjsu.cmpe.kidsontrack.api.resources.TeacherResource)
+    GET     /kidsontrack/v1/teachers/{teacherId}/students (edu.sjsu.cmpe.kidsontrack.api.resources.StudentResource)
+    GET     /kidsontrack/v1/teachers/{teacherId}/students/{id} (edu.sjsu.cmpe.kidsontrack.api.resources.StudentResource)
+    POST    /kidsontrack/v1/teachers/{teacherId}/students (edu.sjsu.cmpe.kidsontrack.api.resources.StudentResource)
+    GET     /kidsontrack/v1/teachers/{teacherId}/courses (edu.sjsu.cmpe.kidsontrack.api.resources.CourseResource)
+    GET     /kidsontrack/v1/teachers/{teacherId}/courses/{id} (edu.sjsu.cmpe.kidsontrack.api.resources.CourseResource)
+    POST    /kidsontrack/v1/teachers/{teacherId}/courses (edu.sjsu.cmpe.kidsontrack.api.resources.CourseResource)
+    GET     /kidsontrack/example (edu.sjsu.cmpe.kidsontrack.resources.ExampleResource)
+    GET     /kidsontrack/ (edu.sjsu.cmpe.kidsontrack.resources.WelcomeResource)
+
+INFO  [2013-10-09 22:37:27,541] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2013-10-09 22:37:27,864] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2013-10-09 22:37:27,866] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081

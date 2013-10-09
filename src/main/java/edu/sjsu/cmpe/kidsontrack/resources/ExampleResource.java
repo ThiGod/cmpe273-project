@@ -7,10 +7,14 @@ import javax.ws.rs.core.MediaType;
 
 import edu.sjsu.cmpe.kidsontrack.views.ExampleView;
 
-@Path("/kidsontrack/example")
+@Path("/example")
 @Produces(MediaType.TEXT_HTML)
 public class ExampleResource {
-
+	
+	public ExampleResource() {
+		
+	}
+	
     @GET
     public ExampleView illustrate() {
         return new ExampleView("Mot\u00f6rhead");

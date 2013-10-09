@@ -2,12 +2,12 @@ package edu.sjsu.cmpe.kidsontrack.views;
 
 import com.yammer.dropwizard.views.View;
 
-public class ExampleView extends View {
+public class WelcomeView extends View {
 
     private final String message;
 
-    public ExampleView(String message) {
-        super("example.ftl");
+    public WelcomeView(String message) {
+        super("welcome.ftl");
         this.message = message;
     }
 
