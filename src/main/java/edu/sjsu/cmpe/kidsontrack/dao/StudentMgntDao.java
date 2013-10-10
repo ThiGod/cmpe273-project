@@ -28,10 +28,10 @@ import edu.sjsu.cmpe.kidsontrack.domain.Teacher;
 public class StudentMgntDao {
 
 	private static final Log log = LogFactory.getLog(StudentMgntDao.class);
-	private static MongoOperations op = new DBConfig().getDB();;
+	private  MongoOperations op = new DBConfig().getDB();;
 
 	
-	public static void addStudent(Student std)
+	public  void addStudent(Student std)
 	{
 		op.save(std);
 		log.info("Insert: " + std.toString());
@@ -39,7 +39,7 @@ public class StudentMgntDao {
 		
 	}
 	
-	public static void updateLastName(long id, String name)
+	public  void updateLastName(long id, String name)
 	{
 		Query query = Query.query(where("_id").is(id));
 		
@@ -52,7 +52,7 @@ public class StudentMgntDao {
 	}
 	
 	
-	public static void updateFirstName(long id, String name)
+	public  void updateFirstName(long id, String name)
 	{
 		
 		Query query = Query.query(where("_id").is(id));
@@ -65,7 +65,7 @@ public class StudentMgntDao {
 	}
 	
 	
-	public static void updateEmail(long id, String email)
+	public  void updateEmail(long id, String email)
 	{
 		
 		Query query = Query.query(where("_id").is(id));
@@ -79,7 +79,7 @@ public class StudentMgntDao {
 	
 	
 	
-	public static Student findById(long id)
+	public  Student findById(long id)
 	{
 		Student std = op.findById(id, Student.class);
 		log.info("Found: " + std);
@@ -87,7 +87,7 @@ public class StudentMgntDao {
 		return std;
 	}
 	
-	public static Student deleteStudent(long id)
+	public  Student deleteStudent(long id)
 	{
 		Student t = findById(id);
 		
@@ -99,7 +99,7 @@ public class StudentMgntDao {
 	
 		
 	
-	public static List<Student> findAllStudents()
+	public  List<Student> findAllStudents()
 	{
 		List<Student> people = op.findAll(Student.class);
 		log.info("Number of people = : " + people.size());
@@ -109,13 +109,13 @@ public class StudentMgntDao {
 	}
 	
 	
-	public static void deleteStudentTable()
+	public  void deleteStudentTable()
 	{
 		op.dropCollection(Student.class);
 	}
 	
 	
-	public static void updateAny(long id, String key, String value) 
+	public  void updateAny(long id, String key, String value) 
 	{
 		Query query = Query.query(where("_id").is(id));
 		

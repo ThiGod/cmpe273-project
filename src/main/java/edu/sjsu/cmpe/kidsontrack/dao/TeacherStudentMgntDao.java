@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
@@ -26,9 +27,12 @@ import edu.sjsu.cmpe.kidsontrack.domain.TeacherStudents;
 public class TeacherStudentMgntDao {
 
 	private static final Log log = LogFactory.getLog(TeacherStudentMgntDao.class);
-	private static MongoOperations op = new DBConfig().getDB();
+	private  MongoOperations op = new DBConfig().getDB();
 	
-	public static void addUpdate(TeacherStudents record)
+	//@Autowired
+	private StudentMgntDao studentMgntDao = new StudentMgntDao();
+	
+	public  void addUpdate(TeacherStudents record)
 	{
 		op.save(record);
 		
@@ -46,7 +50,7 @@ public class TeacherStudentMgntDao {
 	
 	
 	// mapping to the relational table
-	public static void addStudent(long tID, Student std)
+	public void addStudent(long tID, Student std)
 	{
 		TeacherStudents record = op.findById(tID, TeacherStudents.class);
 		
@@ -57,7 +61,7 @@ public class TeacherStudentMgntDao {
 				
 		if(op.findById(std.getUserId(), Student.class) == null)
 		{
-			StudentMgntDao.addStudent(std);
+			studentMgntDao.addStudent(std);
 		}
 		
 		log.info("addStudent: " + record.toString());		
@@ -65,7 +69,7 @@ public class TeacherStudentMgntDao {
 	}
 	
 	
-	public static void addStudentListID(long tID, List<Long> studentIDs)
+	public  void addStudentListID(long tID, List<Long> studentIDs)
 	{
 		TeacherStudents record = op.findById(tID, TeacherStudents.class);
 		
@@ -77,7 +81,7 @@ public class TeacherStudentMgntDao {
 	}
 	
 	
-	public static void addStudentList(long tID, List<Student> students)
+	public  void addStudentList(long tID, List<Student> students)
 	{
 		TeacherStudents record = op.findById(tID, TeacherStudents.class);
 		
@@ -86,7 +90,7 @@ public class TeacherStudentMgntDao {
 			record.addStudent(student.getUserId());
 			if(op.findById(student.getUserId(), Student.class) == null)
 			{
-				StudentMgntDao.addStudent(student);
+				studentMgntDao.addStudent(student);
 			}
 			
 			
@@ -98,7 +102,7 @@ public class TeacherStudentMgntDao {
 	}
 	
 	
-	public static void removeStudent(long tID, long sID)
+	public  void removeStudent(long tID, long sID)
 	{
 		TeacherStudents record = op.findById(tID, TeacherStudents.class);
 		
@@ -109,7 +113,7 @@ public class TeacherStudentMgntDao {
 	}
 	
 	
-	public static TeacherStudents findById(long id)
+	public  TeacherStudents findById(long id)
 	{
 		TeacherStudents ts = op.findById(id, TeacherStudents.class);
 		log.info("Found: " + ts.toString());
@@ -118,7 +122,7 @@ public class TeacherStudentMgntDao {
 		return ts;
 	}
 	
-	public static void deleteTable()
+	public  void deleteTable()
 	{
 		op.dropCollection(TeacherStudents.class);
 	}

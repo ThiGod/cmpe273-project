@@ -14,8 +14,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+
 import com.yammer.metrics.annotation.Timed;
 
+import edu.sjsu.cmpe.kidsontrack.dao.TeacherMgntDao;
 import edu.sjsu.cmpe.kidsontrack.domain.Course;
 import edu.sjsu.cmpe.kidsontrack.domain.Student;
 import edu.sjsu.cmpe.kidsontrack.domain.Teacher;
@@ -30,6 +32,9 @@ import edu.sjsu.cmpe.kidsontrack.util.SequenceGenerator;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class TeacherResource {
+	
+	//@Autowired
+	private TeacherMgntDao teacherMgntDao = new TeacherMgntDao();
 
 	public TeacherResource() {
 		// do nothing
@@ -86,6 +91,11 @@ public class TeacherResource {
 		teacher.setUserId(id);
 
 		TeacherRepository.getTeacherRepository().put(id, teacher);
+		
+		if (teacherMgntDao == null){
+			System.out.println("teacherMgntDao is Null");
+		}
+		teacherMgntDao.addTeacher(teacher);
 
 		LinksDto links = new LinksDto();
 		links.addLink(new LinkDto("view-teacher", "/teachers/"
@@ -112,6 +122,8 @@ public class TeacherResource {
 
 		TeacherRepository.getTeacherRepository().put(teacher.getUserId(),
 				teacher);
+		
+		teacherMgntDao.addTeacher(teacher);
 
 		LinksDto links = new LinksDto();
 		links.addLink(new LinkDto("view-teacher", "/teachers/"
@@ -154,6 +166,8 @@ public class TeacherResource {
 		}
 
 		TeacherRepository.getTeacherRepository().remove(id);
+		
+		teacherMgntDao.deleteTeacher(id);
 
 		LinksDto links = new LinksDto();
 		links.addLink(new LinkDto("create-teacher", "/teachers", "POST"));

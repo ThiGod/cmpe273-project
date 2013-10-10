@@ -12,8 +12,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.yammer.metrics.annotation.Timed;
 
+import edu.sjsu.cmpe.kidsontrack.dao.StudentMgntDao;
 import edu.sjsu.cmpe.kidsontrack.domain.Student;
 import edu.sjsu.cmpe.kidsontrack.domain.Teacher;
 import edu.sjsu.cmpe.kidsontrack.dto.LinkDto;
@@ -29,6 +32,10 @@ import edu.sjsu.cmpe.kidsontrack.util.SequenceGenerator;
 @Consumes(MediaType.APPLICATION_JSON)
 public class StudentResource {
 
+	
+	//@Autowired
+	private StudentMgntDao studentMgntDao = new StudentMgntDao();
+	
 	public StudentResource() {
 		// do nothing
 	}
@@ -61,6 +68,8 @@ public class StudentResource {
 					"Cannot find Student id under this teacher!");
 
 		}
+		
+		student = studentMgntDao.findById(id);
 
 		StudentDto reviewResponse = new StudentDto(student);
 		reviewResponse.setStudent(student);
@@ -82,7 +91,9 @@ public class StudentResource {
 
 		Teacher teacher = TeacherRepository.getTeacherRepository().get(
 				teacherId);
-		List<Student> students = teacher.getStudents();
+		
+		List<Student> students = studentMgntDao.findAllStudents();
+		//List<Student> students = teacher.getStudents();
 
 		StudentsDto response = new StudentsDto();
 		response.setStudents(students);
@@ -108,6 +119,8 @@ public class StudentResource {
 		teacher.getStudents().add(student);
 		
 		TeacherRepository.getTeacherRepository().put(teacherId, teacher);
+		
+		studentMgntDao.addStudent(student);
 
 		LinksDto links = new LinksDto();
 		links.addLink(new LinkDto("view-student", "/teachers/" + teacher.getUserId()

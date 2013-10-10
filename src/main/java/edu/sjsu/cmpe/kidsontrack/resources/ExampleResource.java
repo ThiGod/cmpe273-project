@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 
 import edu.sjsu.cmpe.kidsontrack.views.ExampleView;
 
-@Path("/example")
+@Path("/kidsontrack/example")
 @Produces(MediaType.TEXT_HTML)
 public class ExampleResource {
 	

@@ -1,4 +1,5 @@
 package edu.sjsu.cmpe.kidsontrack.dao;
+
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Update.update;
 import static org.springframework.data.mongodb.core.query.Query.query;
@@ -12,6 +13,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.mongodb.Mongo;
 
@@ -21,157 +23,123 @@ import edu.sjsu.cmpe.kidsontrack.domain.Student;
 import edu.sjsu.cmpe.kidsontrack.domain.Teacher;
 import edu.sjsu.cmpe.kidsontrack.domain.TeacherStudents;
 
-
+@Repository
 public class TeacherMgntDao {
 
 	private static final Log log = LogFactory.getLog(TeacherMgntDao.class);
-	private static MongoOperations op = new DBConfig().getDB();;
+	private MongoOperations op = new DBConfig().getDB();;
 
-	
-	public static void addTeacher(Teacher teacher)
-	{
+	public void addTeacher(Teacher teacher) {
 		op.save(teacher);
-		
-		Teacher t = op.findById(teacher.getUserId(), Teacher.class);
-			
-		TeacherStudents ts = new TeacherStudents(); 
-		ts.set_id(teacher.getUserId());
 
-		TeacherStudentMgntDao.addUpdate(ts);
-		
-		if(t == null)
-			System.out.println("NULL");
-		
-		
-		log.info("addTeacher: " + t.toString());
-		
-		
+		/*
+		 * Teacher t = op.findById(teacher.getUserId(), Teacher.class);
+		 * 
+		 * TeacherStudents ts = new TeacherStudents();
+		 * ts.set_id(teacher.getUserId());
+		 * 
+		 * TeacherStudentMgntDao.addUpdate(ts);
+		 * 
+		 * if(t == null) System.out.println("NULL");
+		 * 
+		 * 
+		 * log.info("addTeacher: " + t.toString());
+		 */
+
 	}
-	
-	
-	public static void addCourse(long id, Course course)
-	{
+
+	public void addCourse(long id, Course course) {
 		Teacher teacher = op.findById(id, Teacher.class);
 		teacher.addCourse(course);
-		
+
 		op.save(teacher);
 		log.info("addCourse: " + course.toString());
-		
+
 	}
-	
-	
-	public static void removeCourse(long id, Course course)
-	{
+
+	public void removeCourse(long id, Course course) {
 		Teacher teacher = op.findById(id, Teacher.class);
 		teacher.removeCourse(course);
-		
+
 		op.save(teacher);
 		log.info("removeCourse: " + course.toString());
-		
+
 	}
-	
-	
-	
-	public static void updateLastName(long id, String name)
-	{
+
+	public void updateLastName(long id, String name) {
 		Query query = Query.query(where("_id").is(id));
-		
-		 
-		op.updateFirst(query,  update("lastName", name), Teacher.class);
+
+		op.updateFirst(query, update("lastName", name), Teacher.class);
 		Teacher teacher = op.findById(id, Teacher.class);
-		
-		
+
 		log.info("Updated lastName: " + teacher.toString());
-		
-		
+
 	}
-	
-	
-	public static void updateFirstName(long id, String name)
-	{
-		
+
+	public void updateFirstName(long id, String name) {
+
 		Query query = Query.query(where("_id").is(id));
-		
-		 
-		op.updateFirst(query,  update("firstName", name), Teacher.class);
+
+		op.updateFirst(query, update("firstName", name), Teacher.class);
 		Teacher teacher = op.findById(id, Teacher.class);
-		
+
 		log.info("Updated firstname: " + id + ": " + name);
-		
+
 	}
-	
-	
-	public static void updateEmail(long id, String email)
-	{
-		
+
+	public void updateEmail(long id, String email) {
+
 		Query query = Query.query(where("_id").is(id));
-		
-		 
-		op.updateFirst(query,  update("email", email), Teacher.class);
-		
+
+		op.updateFirst(query, update("email", email), Teacher.class);
+
 		log.info("Updated email: " + id + ": " + email);
-		
+
 	}
-	
-	
-	public static void updateAny(long id, String key, String value) 
-	{
+
+	public void updateAny(long id, String key, String value) {
 		Query query = Query.query(where("_id").is(id));
-		
+
 		op.updateFirst(query, update(key, value), Teacher.class);
 		Teacher teacher = op.findById(id, Teacher.class);
 		log.info("Updated " + key + ": " + id + ": " + value);
 	}
-	
-	
-	public static Teacher findById(long id)
-	{
+
+	public Teacher findById(long id) {
 		Teacher teacher = op.findById(id, Teacher.class);
 		log.info("Found: " + teacher);
-		
-		
+
 		return teacher;
 	}
-	
-	public static Teacher deleteTeacher(long id)
-	{
+
+	public Teacher deleteTeacher(long id) {
 		Teacher t = findById(id);
-		
+
 		op.remove(t);
-		
+
 		TeacherStudents record = op.findById(id, TeacherStudents.class);
-		
+
 		op.remove(record);
-		
+
 		return t;
-		
+
 	}
-	
-	
-	
-	public static List<Teacher> findAllTeachers()
-	{
+
+	public List<Teacher> findAllTeachers() {
 		List<Teacher> people = op.findAll(Teacher.class);
 		log.info("Number of people = : " + people.size());
-		
+
 		return people;
-		
+
 	}
-	
-	
-	public static boolean isFoundTeacher(Teacher teacher)
-	{
-		return (op.findById(teacher.getUserId(), Teacher.class) == null) ? true : false;
+
+	public boolean isFoundTeacher(Teacher teacher) {
+		return (op.findById(teacher.getUserId(), Teacher.class) == null) ? true
+				: false;
 	}
-	
-	
-		
-	public static void deleteTeacherTable()
-	{
+
+	public void deleteTeacherTable() {
 		op.dropCollection(Teacher.class);
 	}
-	
-	
-
 
 }
