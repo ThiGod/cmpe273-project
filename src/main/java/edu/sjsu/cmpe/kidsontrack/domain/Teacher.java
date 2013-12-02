@@ -59,7 +59,20 @@ public class Teacher extends User{
 		return courses.remove(course);
 	}
 
-
+	public boolean foundCourse(String courseId)
+	{
+		boolean found = false;
+		
+		for(Course c: courses)
+		{
+			if(c.getCourseId().equalsIgnoreCase(courseId))
+					found = true;
+		}
+		
+		return found;
+	}
+	
+	
 	public String toString()
 	{
 		String str = "toString(): \n" + 

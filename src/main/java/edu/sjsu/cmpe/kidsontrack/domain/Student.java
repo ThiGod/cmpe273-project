@@ -58,6 +58,12 @@ public class Student extends User {
 		return null;
 	}
 	
+	public double totalPointForEachCourse(String courseId)
+	{
+		Grade g = findGradeByCourseId(courseId);
+		return g.getTotalPoint();
+	}
+	
 	public boolean removeGrade(Grade gr)
 	{
 		return grades.remove(gr);
@@ -116,5 +122,29 @@ public class Student extends User {
 		return gr;
 	}
 	
+
+	public String printGrades()
+	{
+		String str = "";
+		
+		str = "Student Id: " + getUserId() + "\n";
+		
+		for(Grade gr: grades)
+		{
+			str += "Course Id: " + gr.getCourseId() + "\n";
+			str += "Total point: " + gr.getTotalPoint() + "\n";
+		}		
+		
+		return str;
+	}
+//	
+//	public Grade findGradeByCourseId(String id)
+//	{
+//		for(Grade g: grades)
+//			if(g.getCourseId().equalsIgnoreCase(id))
+//				return g;
+//		
+//		return null;
+//	}
 	
 }

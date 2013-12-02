@@ -3,6 +3,8 @@ package edu.sjsu.cmpe.kidsontrack.dao;
 import java.util.List;
 
 import edu.sjsu.cmpe.kidsontrack.domain.Course;
+import edu.sjsu.cmpe.kidsontrack.domain.Grade;
+import edu.sjsu.cmpe.kidsontrack.domain.Scores;
 import edu.sjsu.cmpe.kidsontrack.domain.Student;
 import edu.sjsu.cmpe.kidsontrack.domain.Teacher;
 
@@ -38,5 +40,13 @@ public interface TeacherMgntDaoInterface {
 	
 	public boolean addStudent(String teacherId, String studentId);
 	
+	public Student getHiStudentByCourse(String teacherId, String courseId);
 	
+	public boolean addScore(String teacherId, String studentId, String courseId, Scores score);
+	
+	public boolean removeScore(String teacherId, String studentId, String courseId, Scores score);
+		
+	
+	public boolean addGrade(String teacherId, String studentId, Grade drade);
+		
 }

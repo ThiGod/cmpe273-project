@@ -20,8 +20,13 @@ public class Grade {
 	}
 	
 	
-	public void setScores(List<Scores> scores) {
+	public boolean setScores(List<Scores> scores) {
+		
+		if(scores.isEmpty())
+			return false;
+		
 		this.scores = scores;
+		return true;
 	}
 	
 	
@@ -36,6 +41,20 @@ public class Grade {
 		return scores.remove(score);
 	}
 	
+	
+	public boolean removeScore(String name)
+	{
+		for(int i = 0; i < scores.size(); i++)
+			if(scores.get(i).getType().equalsIgnoreCase(name))
+			{
+				scores.remove(i);
+				return true;
+			}	
+		return false;
+	}
+	
+	
+	
 	public String getCourseId() {
 		return courseId;
 	}
@@ -45,6 +64,33 @@ public class Grade {
 		this.courseId = courseId;
 	}
 	
+	
+	public double getTotalPoint()
+	{
+		double total = 0;
+		
+		for(Scores sc: scores)
+		{
+			total+= sc.getPoint();
+		}
+		
+		return total;
+	}
+	
+	
+	public boolean removeScorebyName(String name)
+	{
+		if(scores.isEmpty())
+			return false;
+		
+		for(int i= scores.size()-1; i > -1; i--)
+		{	
+			if(scores.get(i).getType().equalsIgnoreCase(name))
+				scores.remove(i);
+		}
+		
+		return true;
+	}
 	
 	public String toString()
 	{

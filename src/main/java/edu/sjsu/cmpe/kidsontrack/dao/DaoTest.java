@@ -1,5 +1,6 @@
 package edu.sjsu.cmpe.kidsontrack.dao;
 
+import edu.sjsu.cmpe.kidsontrack.domain.Course;
 import edu.sjsu.cmpe.kidsontrack.domain.Grade;
 import edu.sjsu.cmpe.kidsontrack.domain.Scores;
 import edu.sjsu.cmpe.kidsontrack.domain.Student;
@@ -56,6 +57,14 @@ public class DaoTest {
 		return sc;
 	}
 	
+	public static Course generateCourse(String id, String name)
+	{
+		Course c = new Course();
+		c.setCourseId(id);
+		c.setName(name);
+		return c;
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -66,9 +75,14 @@ public class DaoTest {
 		Student s1 = generateStudent("student", 1);
 		Student s2 = generateStudent("student", 2);
 		
-		Grade g1 = generateGrade("homework", "g1");
+		Course c1 = generateCourse("course1", "course1");
+		Course c2 = generateCourse("course2", "course2");
+		
+		Grade g1 = generateGrade("homework!!!", "g1");
 		Grade g2 = generateGrade("quiz", "g2");
 		g1.addScore(generateScore("homeowrk", 10));
+		g1.addScore(generateScore("homeowrk1", 10));
+		g1.addScore(generateScore("homeowrk2", 10));
 		
 		StudentMgntDaoInterface sDao = new StudentMgntDao();
 		TeacherMgntDaoInterface tDao = new TeacherMgntDao();
@@ -81,17 +95,47 @@ public class DaoTest {
 		
 		tDao.addTeacher(t1);
 		tDao.addTeacher(t2);
-		tDao.addStudent(t1.getUserId(), "newStudent");
-		tDao.addStudent(t1.getUserId(), "newStudent1");
+//		tDao.addStudent(t1.getUserId(), "newStudent");
+//		tDao.addStudent(t1.getUserId(), "newStudent1");
+		tDao.addStudent(t1.getUserId(), s1.getUserId());
+		tDao.addStudent(t1.getUserId(), s2.getUserId());
 		
-		tDao.addCourse(t1.getUserId(), "course1", "alg");
-		tDao.addCourse(t1.getUserId(), "course2", "alg1");
-		tDao.removeCourse(t1.getUserId(), "course2", "alg1");
+//		tDao.addCourse(t1.getUserId(), "course1", "alg");
+//		tDao.addCourse(t1.getUserId(), "course2", "alg1");
+//		tDao.removeCourse(t1.getUserId(), "course2", "alg1");
+//		
+		tDao.addCourse(t1.getUserId(), c1);
+		tDao.addCourse(t1.getUserId(), c2);
 		
-		s1.addGrade(g1);
-		s1.addGrade(g2);
+		tDao.addScore(t1.getUserId(),s1.getUserId(), c1.getCourseId(), generateScore("hw1", 10));
+		tDao.addScore(t1.getUserId(),s1.getUserId(), c1.getCourseId(), generateScore("hw2", 10));
 		
-		sDao.addStudent(s1);
+		tDao.addScore(t1.getUserId(),s2.getUserId(), c1.getCourseId(), generateScore("hw2", 8));
+		tDao.addScore(t1.getUserId(),s2.getUserId(), c1.getCourseId(), generateScore("hw1", 8));
+		
+		
+		g1.setCourseId(c1.getCourseId());
+		tDao.addGrade(t1.getUserId(),s2.getUserId(), g1);
+		
+		Scores sc = g1.getScores().get(0);
+		System.out.println(sc.getType());
+		
+		tDao.removeScore(t1.getUserId(),s2.getUserId(), c1.getCourseId(), sc);
+		
+		
+		
+//		sDao.addGrade(s1.getUserId(),g1);
+//		sDao.addGrade(s1.getUserId(),g2);
+//		sDao.addGrade(s2.getUserId(),g1);
+//		
+		Student s = tDao.getHiStudentByCourse(t1.getUserId(), c1.getCourseId());
+		System.out.println("highest grade: " + s.getUserId() + " for course: " + c1.getCourseId());
+////		
+		//System.out.println(s1.printGrades());
+		//System.out.println(g1.toString());
+		//System.out.println("remove score: " + g1.removeScorebyName("homeowrk2"));
+		
+//		sDao.addStudent(s1);
 		
 		
 		

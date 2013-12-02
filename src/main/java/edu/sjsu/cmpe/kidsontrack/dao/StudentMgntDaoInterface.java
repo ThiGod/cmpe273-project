@@ -1,5 +1,6 @@
 package edu.sjsu.cmpe.kidsontrack.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import edu.sjsu.cmpe.kidsontrack.domain.Grade;
@@ -33,5 +34,11 @@ public interface StudentMgntDaoInterface {
 	
 	public boolean addScore(String studentId, String courseId, Scores score);
 
+	public boolean setScores(String studentId, String courseId, List<Scores> scores); 
+		
 	public boolean removeScore(String studentId, String courseId, Scores score);
+	
+	public HashMap getTotalPoint(String studentId);
+	
+	
 }

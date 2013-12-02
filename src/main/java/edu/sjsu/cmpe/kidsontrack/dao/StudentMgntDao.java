@@ -6,6 +6,7 @@ import static org.springframework.data.mongodb.core.query.Update.update;
 import static org.springframework.data.mongodb.core.query.Query.query;
 
 import java.net.UnknownHostException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -144,6 +145,8 @@ public class StudentMgntDao implements StudentMgntDaoInterface{
 		return true;
 	}
 
+
+
 	@Override
 	public boolean removeGrade(String studentId, Grade grade) 
 	{
@@ -177,6 +180,24 @@ public class StudentMgntDao implements StudentMgntDaoInterface{
 	}
 
 	@Override
+	public boolean setScores(String studentId, String courseId, List<Scores> scores) 
+	{
+		Student student = op.findById(studentId, Student.class);
+		
+		if(student == null)
+			return false;
+		
+		boolean valid = student.findGradeByCourseId(courseId).setScores(scores);
+		
+		op.save(student);
+				
+		log.info("addScore: " + student.toString());
+		
+		return valid;
+	}
+	
+	
+	@Override
 	public boolean removeScore(String studentId, String courseId, Scores score) 
 	{
 		Student student = op.findById(studentId, Student.class);
@@ -184,13 +205,30 @@ public class StudentMgntDao implements StudentMgntDaoInterface{
 		if(student == null)
 			return false;
 		
-		boolean valid = student.findGradeByCourseId(courseId).removeScore(score);
+		//boolean valid = student.findGradeByCourseId(courseId).removeScore(score);
+		boolean valid = student.findGradeByCourseId(courseId).removeScore(score.getType());
+		
 		
 		op.save(student);
 				
-		log.info("removeScore: " + student.toString());
+		log.info("removeScore: " + student.toString() + "result: " + valid);
 		
 		return valid;
+	}
+	
+	
+	public HashMap getTotalPoint(String studentId)
+	{
+		HashMap<String, Double> tables = new HashMap<String, Double>();
+		
+		Student student = op.findById(studentId, Student.class);
+		
+		List<Grade> grades = student.getGrades();
+		
+		for(Grade g: grades)
+			tables.put(g.getCourseId(), g.getTotalPoint());
+				
+		return tables;
 	}
 	
 

@@ -24,6 +24,7 @@ import com.mongodb.Mongo;
 import edu.sjsu.cmpe.kidsontrack.config.DBConfig;
 import edu.sjsu.cmpe.kidsontrack.domain.Course;
 import edu.sjsu.cmpe.kidsontrack.domain.Grade;
+import edu.sjsu.cmpe.kidsontrack.domain.Scores;
 import edu.sjsu.cmpe.kidsontrack.domain.Student;
 import edu.sjsu.cmpe.kidsontrack.domain.Teacher;
 
@@ -151,17 +152,25 @@ public class TeacherMgntDao implements TeacherMgntDaoInterface{
 		
 		for(String studentId: students)
 		{
-			Student s = op.findById(studentId, Student.class);
+//			Student s = op.findById(studentId, Student.class);
+//			Grade grade = new Grade();
+//			grade.setCourseId(course.getCourseId());
+//			s.addGrade(grade);
+//			op.save(s);
+			
 			Grade grade = new Grade();
 			grade.setCourseId(course.getCourseId());
-			s.addGrade(grade);
-			op.save(s);
+			
+			(new StudentMgntDao()).addGrade(studentId, grade);
 		}
 		
 		log.info("addCourse: " + course.toString());
 
 	}
 
+	
+	
+	
 	public boolean addCourse(String teacherId, String courseId, String courseName) 
 	{
 		Query query = Query.query(where("_id").is(teacherId));
@@ -276,23 +285,113 @@ public class TeacherMgntDao implements TeacherMgntDaoInterface{
 		
 		Teacher t = op.findById(teacherId, Teacher.class);
 		List<Course> courses = t.getCourses();
-		
+			
 		if(student == null)
 		{
 			Student s = new Student();
 			s.setUserId(studentId);			
-			s = Student.copyCourseId(courses);
+			
+			if(!courses.isEmpty())
+				s = Student.copyCourseId(courses);
 			op.save(s);
 		}
-		
-		student.setGrades(Student.courseToGrade(courses));
-		op.save(student);
+			
+		if(!courses.isEmpty())
+		{
+			student.setGrades(Student.courseToGrade(courses));
+			op.save(student);
+		}
 		
 		log.info("AddStudent " + "student" + ": " + studentId );
 		return true;		
 	}
 
+	
+	public Student getHiStudentByCourse(String teacherId, String courseId)
+	{
+	
+		Teacher t = op.findById(teacherId, Teacher.class);
+		double max = -1;
+		
+		if(!t.foundCourse(courseId))
+		{
+			log.info("can't find the course taught by teacher: " + teacherId);
+			return null;
+		}
+		
+		List<String> studentId = t.getStudents();
+		Student maxStudent = new Student();
+		for(String id: studentId)
+		{
+			Student s = op.findById(id, Student.class);
+			double current = s.findGradeByCourseId(courseId).getTotalPoint();
+			
+			if(max < current) {
+				max = current;
+				maxStudent = s;
+			}	
+		}
+		
+		return maxStudent;
+	}
+
+	
+	public boolean addScore(String teacherId, String studentId, String courseId, Scores score) {
+		Teacher teacher = op.findById(teacherId, Teacher.class);
+		
+		if(!teacher.foundCourse(courseId))
+			return false;
+		
+		if(!teacher.getStudents().contains(studentId))
+			return false;
+		
+		(new StudentMgntDao()).addScore(studentId, courseId, score);
+	
+		
+		log.info("StudentId: " + studentId + "\naddGrade: " + courseId 
+				+ "\naddScore: " + score.toString());
+
+		return true;
+	}
+	
+
+	public boolean removeScore(String teacherId, String studentId, String courseId, Scores score) {
+		Teacher teacher = op.findById(teacherId, Teacher.class);
+		
+		if(!teacher.foundCourse(courseId))
+			return false;
+		
+		if(!teacher.getStudents().contains(studentId))
+			return false;
+		
+		(new StudentMgntDao()).removeScore(studentId, courseId, score);
+	
+		
+		log.info("StudentId: " + studentId + "\nremoveGrade: " + courseId 
+				+ "\nremoveScore: " + score.toString());
+
+		return true;
+	}
+
+	
+	public boolean addGrade(String teacherId, String studentId, Grade grade) {
+		Teacher teacher = op.findById(teacherId, Teacher.class);
+		
+		if(!teacher.foundCourse(grade.getCourseId()))
+			return false;
+		
+		if(!teacher.getStudents().contains(studentId))
+			return false;
+		
+		(new StudentMgntDao()).setScores(studentId, grade.getCourseId(), grade.getScores());
+	
+		
+		log.info("StudentId: " + studentId + "\naddGrade: " + grade.toString());
+
+		return true;
+	}
 
 
+	
 
 }
