@@ -11,6 +11,8 @@ import edu.sjsu.cmpe.kidsontrack.api.resources.StudentResource;
 import edu.sjsu.cmpe.kidsontrack.api.resources.TeacherResource;
 import edu.sjsu.cmpe.kidsontrack.config.KidsOnTrackServiceConfiguration;
 import edu.sjsu.cmpe.kidsontrack.resources.ExampleResource;
+import edu.sjsu.cmpe.kidsontrack.resources.LoginResource;
+import edu.sjsu.cmpe.kidsontrack.resources.SignupResource;
 import edu.sjsu.cmpe.kidsontrack.resources.WelcomeResource;
 
 public class KidsOnTrackService extends
@@ -39,5 +41,7 @@ public class KidsOnTrackService extends
 		/** GUI Side */
 		environment.addResource(ExampleResource.class);
 		environment.addResource(WelcomeResource.class);
+		environment.addResource(LoginResource.class);
+		environment.addResource(SignupResource.class);
 	}
 }
