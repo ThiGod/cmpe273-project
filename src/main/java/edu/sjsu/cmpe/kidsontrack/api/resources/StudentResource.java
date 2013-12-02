@@ -82,7 +82,7 @@ public class StudentResource {
 
 	@GET
 	@Timed(name = "view-students")
-	public StudentsDto getAllReview(@PathParam("teacherId") long teacherId)
+	public StudentsDto getAllStudents(@PathParam("teacherId") long teacherId)
 			throws Exception {
 
 		if (!TeacherRepository.getTeacherRepository().containsKey(teacherId)) {
@@ -104,7 +104,7 @@ public class StudentResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Timed(name = "create-student")
-	public Response createReview(@PathParam("teacherId") long teacherId,
+	public Response createStudent(@PathParam("teacherId") long teacherId,
 			@Valid Student student) throws Exception {
 
 		if (!TeacherRepository.getTeacherRepository().containsKey(teacherId)) {

@@ -17,12 +17,13 @@ import javax.ws.rs.core.Response;
 import com.yammer.metrics.annotation.Timed;
 
 import edu.sjsu.cmpe.kidsontrack.dao.TeacherMgntDao;
+import edu.sjsu.cmpe.kidsontrack.dao.TeacherMgntDaoInterface;
 import edu.sjsu.cmpe.kidsontrack.domain.Course;
-import edu.sjsu.cmpe.kidsontrack.domain.Student;
 import edu.sjsu.cmpe.kidsontrack.domain.Teacher;
 import edu.sjsu.cmpe.kidsontrack.dto.LinkDto;
 import edu.sjsu.cmpe.kidsontrack.dto.LinksDto;
 import edu.sjsu.cmpe.kidsontrack.dto.TeacherResponseDto;
+import edu.sjsu.cmpe.kidsontrack.dto.TeachersDto;
 import edu.sjsu.cmpe.kidsontrack.exception.HTTPClientException;
 import edu.sjsu.cmpe.kidsontrack.repository.TeacherRepository;
 import edu.sjsu.cmpe.kidsontrack.util.SequenceGenerator;
@@ -31,12 +32,27 @@ import edu.sjsu.cmpe.kidsontrack.util.SequenceGenerator;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class TeacherResource {
-	
-	//@Autowired
-	private TeacherMgntDao teacherMgntDao = new TeacherMgntDao();
+
+	// @Autowired
+	private TeacherMgntDaoInterface teacherMgntDao = new TeacherMgntDao();
 
 	public TeacherResource() {
 		// do nothing
+	}
+
+	@GET
+	@Path("/")
+	@Timed(name = "view-all-teachers")
+	public TeachersDto getAllTeachers() throws Exception {
+
+		List<Teacher> teachers = teacherMgntDao.findAllTeachers();
+
+		TeachersDto response = new TeachersDto();
+		response.setTeachers(teachers);
+
+		response.addLink(new LinkDto("create-teacher", "/teachers", "POST"));
+
+		return response;
 	}
 
 	@GET
@@ -45,11 +61,8 @@ public class TeacherResource {
 	public TeacherResponseDto getTeacherById(@PathParam("id") long id)
 			throws Exception {
 
-		if (!TeacherRepository.getTeacherRepository().containsKey(id)) {
-			throw new HTTPClientException("id does not match!");
-		}
-
-		Teacher teacher = TeacherRepository.getTeacherRepository().get(id);
+		
+		Teacher teacher =teacherMgntDao.findTeacherById(String.valueOf(id));
 
 		TeacherResponseDto teacherResponse = new TeacherResponseDto(teacher);
 
@@ -89,11 +102,6 @@ public class TeacherResource {
 		long id = SequenceGenerator.nextTeacherId();
 		teacher.setUserId(String.valueOf(id));
 
-		TeacherRepository.getTeacherRepository().put(String.valueOf(id), teacher);
-		
-		if (teacherMgntDao == null){
-			System.out.println("teacherMgntDao is Null");
-		}
 		teacherMgntDao.addTeacher(teacher);
 
 		LinksDto links = new LinksDto();
@@ -114,14 +122,6 @@ public class TeacherResource {
 	@Timed(name = "update-teacher")
 	public Response updateTeacher(@Valid Teacher teacher) throws Exception {
 
-		if (!TeacherRepository.getTeacherRepository().containsKey(
-				teacher.getUserId())) {
-			throw new HTTPClientException("id does not match!");
-		}
-
-		TeacherRepository.getTeacherRepository().put(teacher.getUserId(),
-				teacher);
-		
 		teacherMgntDao.addTeacher(teacher);
 
 		LinksDto links = new LinksDto();
@@ -160,13 +160,22 @@ public class TeacherResource {
 	public Response deleteTeacherById(@PathParam("id") long id)
 			throws Exception {
 
-		if (!TeacherRepository.getTeacherRepository().containsKey(id)) {
-			throw new HTTPClientException("id does not match!");
-		}
-
-		TeacherRepository.getTeacherRepository().remove(id);
-		
 		teacherMgntDao.deleteTeacherById(String.valueOf(id));
+
+		LinksDto links = new LinksDto();
+		links.addLink(new LinkDto("create-teacher", "/teachers", "POST"));
+
+		return Response.ok(links).build();
+
+	}
+	
+	@DELETE
+	@Path("/")
+	@Timed(name = "delete-all-teachers")
+	public Response deleteAllTeachers()
+			throws Exception {
+
+		teacherMgntDao.deleteTeacherTable();
 
 		LinksDto links = new LinksDto();
 		links.addLink(new LinkDto("create-teacher", "/teachers", "POST"));
