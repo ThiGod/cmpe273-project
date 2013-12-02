@@ -14,7 +14,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
 import com.yammer.metrics.annotation.Timed;
 
 import edu.sjsu.cmpe.kidsontrack.dao.TeacherMgntDao;
@@ -63,7 +62,7 @@ public class TeacherResource {
 		teacherResponse.addLink(new LinkDto("create-teacher", "/teachers/"
 				+ teacher.getUserId(), "POST"));
 
-		List<Student> studentList = teacher.getStudents();
+		List<String> studentList = teacher.getStudents();
 
 		// if students > 0, add view-all-students link
 		if (studentList.size() > 0) {
@@ -88,9 +87,9 @@ public class TeacherResource {
 	public Response createTeacher(@Valid Teacher teacher) throws Exception {
 
 		long id = SequenceGenerator.nextTeacherId();
-		teacher.setUserId(id);
+		teacher.setUserId(String.valueOf(id));
 
-		TeacherRepository.getTeacherRepository().put(id, teacher);
+		TeacherRepository.getTeacherRepository().put(String.valueOf(id), teacher);
 		
 		if (teacherMgntDao == null){
 			System.out.println("teacherMgntDao is Null");
@@ -135,7 +134,7 @@ public class TeacherResource {
 		links.addLink(new LinkDto("create-teacher", "/teachers/"
 				+ teacher.getUserId(), "POST"));
 
-		List<Student> studentList = teacher.getStudents();
+		List<String> studentList = teacher.getStudents();
 
 		// if students > 0, add view-all-students link
 		if (studentList.size() > 0) {
@@ -167,7 +166,7 @@ public class TeacherResource {
 
 		TeacherRepository.getTeacherRepository().remove(id);
 		
-		teacherMgntDao.deleteTeacher(id);
+		teacherMgntDao.deleteTeacherById(String.valueOf(id));
 
 		LinksDto links = new LinksDto();
 		links.addLink(new LinkDto("create-teacher", "/teachers", "POST"));

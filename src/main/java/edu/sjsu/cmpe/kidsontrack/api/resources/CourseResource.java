@@ -12,38 +12,31 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.yammer.metrics.annotation.Timed;
 
-import edu.sjsu.cmpe.kidsontrack.dao.StudentMgntDao;
-import edu.sjsu.cmpe.kidsontrack.domain.Student;
+import edu.sjsu.cmpe.kidsontrack.domain.Course;
 import edu.sjsu.cmpe.kidsontrack.domain.Teacher;
+import edu.sjsu.cmpe.kidsontrack.dto.CourseDto;
+import edu.sjsu.cmpe.kidsontrack.dto.CoursesDto;
 import edu.sjsu.cmpe.kidsontrack.dto.LinkDto;
 import edu.sjsu.cmpe.kidsontrack.dto.LinksDto;
-import edu.sjsu.cmpe.kidsontrack.dto.StudentDto;
-import edu.sjsu.cmpe.kidsontrack.dto.StudentsDto;
 import edu.sjsu.cmpe.kidsontrack.exception.HTTPClientException;
 import edu.sjsu.cmpe.kidsontrack.repository.TeacherRepository;
 import edu.sjsu.cmpe.kidsontrack.util.SequenceGenerator;
 
-@Path("/v1/teachers/{teacherId}/students")
+@Path("/v1/teachers/{teacherId}/courses")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class StudentResource {
+public class CourseResource {
 
-	
-	//@Autowired
-	private StudentMgntDao studentMgntDao = new StudentMgntDao();
-	
-	public StudentResource() {
+	public CourseResource() {
 		// do nothing
 	}
 
 	@GET
 	@Path("/{id}")
-	@Timed(name = "view-student")
-	public StudentDto getStudent(@PathParam("teacherId") long teacherId,
+	@Timed(name = "view-course")
+	public CourseDto getCourse(@PathParam("teacherId") long teacherId,
 			@PathParam("id") long id) throws Exception {
 
 		if (!TeacherRepository.getTeacherRepository().containsKey(teacherId)) {
@@ -52,37 +45,35 @@ public class StudentResource {
 
 		Teacher teacher = TeacherRepository.getTeacherRepository().get(
 				teacherId);
-		List<String> students = teacher.getStudents();
+		List<Course> courses = teacher.getCourses();
 
-		String studentId = null;
+		Course course = null;
 
-		for (String temp : students) {
-			if (temp == String.valueOf(id)) {
-				studentId = temp;
+		for (Course temp : courses) {
+			if (temp.getCourseId() == String.valueOf(id)) {
+				course = temp;
 				break;
 			}
 		}
 
-		if (null == studentId) {
+		if (null == course) {
 			throw new HTTPClientException(
-					"Cannot find Student id under this teacher!");
+					"Cannot find Course id under this teacher!");
 
 		}
-		
-		Student student = studentMgntDao.findStudentById(String.valueOf(id));
 
-		StudentDto reviewResponse = new StudentDto(student);
-		reviewResponse.setStudent(student);
-		reviewResponse.addLink(new LinkDto("view-student", "/teachers/"
-				+ teacher.getUserId() + "/students/" + student.getUserId(),
+		CourseDto response = new CourseDto(course);
+		response.setCourse(course);
+		response.addLink(new LinkDto("view-course", "/teachers/"
+				+ teacher.getUserId() + "/courses/" + course.getCourseId(),
 				"GET"));
 
-		return reviewResponse;
+		return response;
 	}
 
 	@GET
-	@Timed(name = "view-students")
-	public StudentsDto getAllReview(@PathParam("teacherId") long teacherId)
+	@Timed(name = "view-courses")
+	public CoursesDto getAllCourse(@PathParam("teacherId") long teacherId)
 			throws Exception {
 
 		if (!TeacherRepository.getTeacherRepository().containsKey(teacherId)) {
@@ -92,39 +83,37 @@ public class StudentResource {
 		Teacher teacher = TeacherRepository.getTeacherRepository().get(
 				teacherId);
 		
-		List<Student> students = studentMgntDao.findAllStudents();
-		//List<Student> students = teacher.getStudents();
+		List<Course> courses = teacher.getCourses();
 
-		StudentsDto response = new StudentsDto();
-		response.setStudents(students);
+		CoursesDto response = new CoursesDto();
+		response.setCourses(courses);
 
 		return response;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Timed(name = "create-student")
+	@Timed(name = "create-course")
 	public Response createReview(@PathParam("teacherId") long teacherId,
-			@Valid Student student) throws Exception {
+			@Valid Course course) throws Exception {
 
 		if (!TeacherRepository.getTeacherRepository().containsKey(teacherId)) {
 			throw new HTTPClientException("Teacher id does not match!");
 		}
 
-		long id = SequenceGenerator.nextStudentId();
-		student.setUserId(String.valueOf(id));
+		long id = SequenceGenerator.nextCourseId();
+		course.setCourseId(String.valueOf(id));
 
 		Teacher teacher = TeacherRepository.getTeacherRepository().get(
 				teacherId);
-		teacher.getStudents().add(student.getUserId());
+		
+		teacher.getCourses().add(course);
 		
 		TeacherRepository.getTeacherRepository().put(String.valueOf(teacherId), teacher);
-		
-		studentMgntDao.addStudent(student);
 
 		LinksDto links = new LinksDto();
-		links.addLink(new LinkDto("view-student", "/teachers/" + teacher.getUserId()
-				+ "/students/" + student.getUserId(), "GET"));
+		links.addLink(new LinkDto("view-course", "/teachers/" + teacher.getUserId()
+				+ "/courses/" + course.getCourseId(), "GET"));
 
 		return Response.status(201).entity(links).build();
 

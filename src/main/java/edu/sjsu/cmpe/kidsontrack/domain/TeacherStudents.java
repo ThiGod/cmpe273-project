@@ -2,6 +2,7 @@ package edu.sjsu.cmpe.kidsontrack.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.data.annotation.Id;
 
 
@@ -9,7 +10,7 @@ public class TeacherStudents {
 
 	@Id
 	private long _id;
-	private List<Long> studentIds = new ArrayList<Long>();
+	private List<String> studentIds = new ArrayList<String>();
 	
 	
 	public TeacherStudents()
@@ -23,7 +24,7 @@ public class TeacherStudents {
 	}
 
 
-	public List<Long> getStudentIds() {
+	public List<String> getStudentIds() {
 		return studentIds;
 	}
 
@@ -35,15 +36,15 @@ public class TeacherStudents {
 	}
 
 
-	public void setStudentIds(List<Long> studentIds) {
+	public void setStudentIds(List<String> studentIds) {
 		this.studentIds = studentIds;
 	}
 
 
 
-	public void addStudent(long sID)
+	public void addStudent(String string)
 	{
-		studentIds.add(sID);
+		studentIds.add(string);
 	}
 	
 	public void removeStudent(long sID)
@@ -61,7 +62,7 @@ public class TeacherStudents {
 	{
 		String str = "{T/S: " + "_id: " + _id + " ";
 		
-		for(long id: studentIds)
+		for(String id: studentIds)
 			str += " student " + id +":";
 		
 		return str;

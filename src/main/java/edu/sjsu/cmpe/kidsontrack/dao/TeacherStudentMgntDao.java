@@ -69,7 +69,7 @@ public class TeacherStudentMgntDao {
 	}
 	
 	
-	public  void addStudentListID(long tID, List<Long> studentIDs)
+	public  void addStudentListID(long tID, List<String> studentIDs)
 	{
 		TeacherStudents record = op.findById(tID, TeacherStudents.class);
 		
