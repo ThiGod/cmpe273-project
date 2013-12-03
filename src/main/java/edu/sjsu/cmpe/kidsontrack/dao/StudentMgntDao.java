@@ -145,6 +145,22 @@ public class StudentMgntDao implements StudentMgntDaoInterface{
 		return true;
 	}
 
+	
+	public boolean isFound(String email, String pwd)
+	{
+		boolean found = false;
+		Query query = Query.query(where("email").is(email)).addCriteria(where("password").is(pwd));
+		
+		List<Student> t = op.find(query, Student.class);
+		
+		System.out.println("size" + t.size());
+		
+		if(t.size() > 0)
+			found = true;
+		
+		return found;
+	}
+	
 
 
 	@Override

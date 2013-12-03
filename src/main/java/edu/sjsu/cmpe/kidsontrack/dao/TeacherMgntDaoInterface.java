@@ -30,13 +30,15 @@ public interface TeacherMgntDaoInterface {
 	
 	public void addCourse(String id, Course course);
 	
-	public boolean addCourse(String teacherId, String courseId, String courseName); 
+//	public boolean addCourse(String teacherId, String courseId, String courseName); 
 	
 	public void removeCourse(String id, Course course);
 	
-	public boolean removeCourse(String teacherId, String courseId, String courseName); 
+//	public boolean removeCourse(String teacherId, String courseId, String courseName); 
 	
 	public boolean removeStudent(String teacherId, String studentId);
+	
+	public boolean removeAllStudents(String teacherId);
 	
 	public boolean addStudent(String teacherId, String studentId);
 	
@@ -45,8 +47,17 @@ public interface TeacherMgntDaoInterface {
 	public boolean addScore(String teacherId, String studentId, String courseId, Scores score);
 	
 	public boolean removeScore(String teacherId, String studentId, String courseId, Scores score);
-		
 	
 	public boolean addGrade(String teacherId, String studentId, Grade drade);
+	
+	public Course getCourseById(String teacherId, String courseId);
+	
+	public List<Course> getAllCourses(String teacherId);
+	
+	public void removeCourse(String teacherId, String courseId);
+	
+	public void removeAllCourses(String teacherId);
+	
+	public boolean isFound(String email, String pwd);
 		
 }

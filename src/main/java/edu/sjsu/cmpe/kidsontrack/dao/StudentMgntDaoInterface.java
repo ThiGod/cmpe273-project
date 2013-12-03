@@ -40,5 +40,5 @@ public interface StudentMgntDaoInterface {
 	
 	public HashMap getTotalPoint(String studentId);
 	
-	
+	public boolean isFound(String email, String pwd);
 }

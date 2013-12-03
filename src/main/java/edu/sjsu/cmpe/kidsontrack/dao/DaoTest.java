@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe.kidsontrack.dao;
 
+import java.util.List;
+
 import edu.sjsu.cmpe.kidsontrack.domain.Course;
 import edu.sjsu.cmpe.kidsontrack.domain.Grade;
 import edu.sjsu.cmpe.kidsontrack.domain.Scores;
@@ -14,9 +16,10 @@ public class DaoTest {
 		Teacher t = new Teacher();
 		
 		t.setUserId(id + num);
-		t.setFirstName("name" + num);
-		t.setLastName("last"+ num);
-		t.setEmail("email"+num);
+		t.setFirstName("name" +id+ num);
+		t.setLastName("last"+ id+num);
+		t.setEmail("email"+ id+num);
+		t.setPassword("password" + id+num);
 		
 		return t;
 		
@@ -27,9 +30,10 @@ public class DaoTest {
 		Student t = new Student();
 		
 		t.setUserId(id + num);
-		t.setFirstName("name" + num);
-		t.setLastName("last"+ num);
-		t.setEmail("email"+num);
+		t.setFirstName("name" + id+num);
+		t.setLastName("last"+ id+num);
+		t.setEmail("email"+ id+ num);
+		t.setPassword("password" + id+ num);
 		
 		return t;
 		
@@ -118,27 +122,49 @@ public class DaoTest {
 		tDao.addGrade(t1.getUserId(),s2.getUserId(), g1);
 		
 		Scores sc = g1.getScores().get(0);
-		System.out.println(sc.getType());
+//		System.out.println(sc.getType());
+//		
+//		tDao.removeScore(t1.getUserId(),s2.getUserId(), c1.getCourseId(), sc);
+//		tDao.removeStudent(t1.getUserId(),s2.getUserId());
+
+//		tDao.removeAllStudents(t1.getUserId());
 		
-		tDao.removeScore(t1.getUserId(),s2.getUserId(), c1.getCourseId(), sc);
+		//tDao.removeCourse(t1.getUserId(), c1.getCourseId());
 		
+//		Course c = tDao.getCourseById(t1.getUserId(), c1.getCourseId());
+//		
+//		if(c==null)
+//			System.out.println("return course FAILED");
+//		System.out.println(c.toString());
+//		
 		
+//		List<Course> courses = tDao.getAllCourses(t1.getUserId());
+//		
+//		for(Course c: courses)
+//			System.out.println(c.toString());
 		
 //		sDao.addGrade(s1.getUserId(),g1);
 //		sDao.addGrade(s1.getUserId(),g2);
 //		sDao.addGrade(s2.getUserId(),g1);
 //		
-		Student s = tDao.getHiStudentByCourse(t1.getUserId(), c1.getCourseId());
-		System.out.println("highest grade: " + s.getUserId() + " for course: " + c1.getCourseId());
-////		
+//		Student s = tDao.getHiStudentByCourse(t1.getUserId(), c1.getCourseId());
+//		System.out.println("highest grade: " + s.getUserId() + " for course: " + c1.getCourseId());
+//////		
 		//System.out.println(s1.printGrades());
 		//System.out.println(g1.toString());
 		//System.out.println("remove score: " + g1.removeScorebyName("homeowrk2"));
 		
 //		sDao.addStudent(s1);
 		
+//		tDao.removeCourse(t1.getUserId(), c1.getCourseId());
+
+//		tDao.removeAllCourses(t1.getUserId());
 		
+//		boolean found = tDao.isFound(t2.getEmail(), t1.getPassword());
+//		System.out.println("match: " + found);
 		
+		boolean found = sDao.isFound(s2.getEmail(), s1.getPassword());
+		System.out.println("match: " + found);
 		
 	}
 

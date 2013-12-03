@@ -14,7 +14,10 @@ public class Teacher extends User{
 		
 	}
 	
-	
+	public boolean isStudentsEmpty()
+	{
+		return students.isEmpty();
+	}
 	
 	public List<String> getStudents() {
 		return students;
@@ -56,9 +59,44 @@ public class Teacher extends User{
 	
 	public boolean removeCourse(Course course)
 	{
-		return courses.remove(course);
+		if(courses.isEmpty())
+			return false;
+		
+		for(Course c: courses)
+			if(c.getCourseId().equalsIgnoreCase(course.getCourseId()))
+			{	
+				courses.remove(c);
+				return true;
+			}
+		
+		return false;
+	}
+	
+	public boolean removeCourse(String courseId)
+	{
+		if(courses.isEmpty())
+			return false;
+		
+		Course c = getCourseById(courseId); 
+		
+		if(c!= null)		
+		{	
+			courses.remove(c);
+			return true;
+		}
+		
+		return false;
 	}
 
+	public void removeAllCourses()
+	{
+		if(courses.isEmpty())
+			return;
+		
+		courses.clear();
+	}
+	
+	
 	public boolean foundCourse(String courseId)
 	{
 		boolean found = false;
@@ -70,6 +108,18 @@ public class Teacher extends User{
 		}
 		
 		return found;
+	}
+	
+	
+	public Course getCourseById(String courseId)
+	{
+		for(Course c: courses)
+		{
+			if(c.getCourseId().equalsIgnoreCase(courseId))
+					return c;
+		}
+		
+		return null;
 	}
 	
 	

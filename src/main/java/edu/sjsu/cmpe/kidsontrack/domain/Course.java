@@ -31,6 +31,16 @@ public class Course {
 	public void setCourseId(String courseId) {
 		this.courseId = courseId;
 	}
+	
+	
+	public String toString()
+	{
+		String str = "courseId: " + courseId 
+				+ "\nname: " + name;
+		
+		return str;
+	}
+	
 
 
 

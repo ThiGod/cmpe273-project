@@ -61,6 +61,21 @@ public class TeacherMgntDao implements TeacherMgntDaoInterface{
 
 	}
 
+	public boolean isFound(String email, String pwd)
+	{
+		boolean found = false;
+		Query query = Query.query(where("email").is(email)).addCriteria(where("password").is(pwd));
+		
+		List<Teacher> t = op.find(query,Teacher.class);
+		
+		System.out.println("size" + t.size());
+		
+		if(t.size() > 0)
+			found = true;
+		
+		return found;
+	}
+	
 
 	@Override
 	public boolean updateLastName(String id, String lastName) {
@@ -171,31 +186,42 @@ public class TeacherMgntDao implements TeacherMgntDaoInterface{
 	
 	
 	
-	public boolean addCourse(String teacherId, String courseId, String courseName) 
+//	public boolean addCourse(String teacherId, String courseId, String courseName) 
+//	{
+//		Query query = Query.query(where("_id").is(teacherId));
+//		Update update = new Update();
+//		
+//		DBObject updateCourse = BasicDBObjectBuilder.start()
+//                .add("courseId", courseId)
+//                .add("name", courseName).get();
+//		
+//		update.addToSet("courses", updateCourse);
+//		op.updateFirst(query, update, Teacher.class);
+//		
+//		Teacher t = op.findById(teacherId, Teacher.class);
+//		
+//		log.info("Updated " + "courses" + ": " + courseId + ":" + courseName );
+//
+//		// return true if updated, else false
+//		return ( (t!=null) ? true: false);
+//
+//	}
+//	
+	
+	public List<Course> getAllCourses(String teacherId)
 	{
-		Query query = Query.query(where("_id").is(teacherId));
-		Update update = new Update();
+		Teacher teacher = op.findById(teacherId, Teacher.class);
 		
-		DBObject updateCourse = BasicDBObjectBuilder.start()
-                .add("courseId", courseId)
-                .add("name", courseName).get();
-		
-		update.addToSet("courses", updateCourse);
-		op.updateFirst(query, update, Teacher.class);
-		
-		Teacher t = op.findById(teacherId, Teacher.class);
-		
-		log.info("Updated " + "courses" + ": " + courseId + ":" + courseName );
-
-		// return true if updated, else false
-		return ( (t!=null) ? true: false);
-
+		return teacher.getCourses();
 	}
 	
 	
 	public void removeCourse(String id, Course course) {
 		Teacher teacher = op.findById(id, Teacher.class);
-		teacher.removeCourse(course);
+		boolean valid = teacher.removeCourse(course);
+		
+		System.out.println("remove course: " + valid);
+		
 		op.save(teacher);
 		
 		List<String> students = teacher.getStudents();
@@ -212,33 +238,79 @@ public class TeacherMgntDao implements TeacherMgntDaoInterface{
 	}
 
 
-
-	public boolean removeCourse(String teacherId, String courseId, String courseName) 
+	public void removeCourse(String teacherId, String courseId)
 	{
-		Query query = Query.query(where("_id").is(teacherId));
-		Update update = new Update();
+		Teacher teacher = op.findById(teacherId, Teacher.class);
 		
-		DBObject updateCourse = BasicDBObjectBuilder.start()
-                .add("courseId", courseId)
-                .add("name", courseName).get();
+		Course c = teacher.getCourseById(courseId);
 		
-		update.pull("courses", updateCourse);
-		op.updateFirst(query, update, Teacher.class);
-		
-		Teacher t = op.findById(teacherId, Teacher.class);
-		
-		log.info("Updated " + "courses" + ": " + courseId + ":" + courseName );
-
-		// return true if updated, else false
-		return ( (t!=null) ? true: false);
-
+		removeCourse(teacherId, c);
 	}
+	
+	
+	public void removeAllCourses(String teacherId)
+	{
+		Teacher teacher = op.findById(teacherId, Teacher.class);
+		teacher.removeAllCourses();
+		op.save(teacher);
+		
+		List<String> students = teacher.getStudents();
+		
+		for(String s: students)
+		{
+			Student student = op.findById(s, Student.class);
+			student.removeAllGrades();
+			op.save(student);
+		}
+		
+		// remove all the grades from the student
+		
+	}
+
+//	public boolean removeCourse(String teacherId, String courseId, String courseName) 
+//	{
+//		Query query = Query.query(where("_id").is(teacherId));
+//		Update update = new Update();
+//		
+//		DBObject updateCourse = BasicDBObjectBuilder.start()
+//                .add("courseId", courseId)
+//                .add("name", courseName).get();
+//		
+//		update.pull("courses", updateCourse);
+//		op.updateFirst(query, update, Teacher.class);
+//		
+//		Teacher t = op.findById(teacherId, Teacher.class);
+//		
+//		log.info("Updated " + "courses" + ": " + courseId + ":" + courseName );
+//
+//		// return true if updated, else false
+//		return ( (t!=null) ? true: false);
+//
+//	}
 
 	public boolean isFoundTeacher(Teacher teacher) {
 		return (op.findById(teacher.getUserId(), Teacher.class) == null) ? true
 				: false;
 	}
 
+	
+	@Override
+	public boolean removeAllStudents(String teacherId) 
+	{
+		Teacher teacher = op.findById(teacherId, Teacher.class);
+		
+		List<String> studentList = teacher.getStudents();
+		
+		for(String stdId: studentList)
+			removeStudent(teacherId, stdId);
+		
+		teacher = op.findById(teacherId, Teacher.class);
+		
+		return teacher.isStudentsEmpty();
+	}
+
+	
+	
 	/* Teacher won't remove the student from the DB.
 	** Teach can only remove the student from the students list
 	*/
@@ -266,6 +338,9 @@ public class TeacherMgntDao implements TeacherMgntDaoInterface{
 
 	}
 
+	
+
+	
 	
 	/* Teacher adds the student to the students list 
 	** and add to the DB if it's not existing
@@ -390,6 +465,20 @@ public class TeacherMgntDao implements TeacherMgntDaoInterface{
 
 		return true;
 	}
+
+	@Override
+	public Course getCourseById(String teacherId, String courseId) 
+	{
+		Teacher teacher = op.findById(teacherId, Teacher.class);
+		
+		if(teacher == null)
+			return null;
+		
+		Course c = teacher.getCourseById(courseId);
+		
+		return c;
+	}
+
 
 
 	
