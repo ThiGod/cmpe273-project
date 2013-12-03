@@ -24,8 +24,6 @@ import edu.sjsu.cmpe.kidsontrack.dto.LinkDto;
 import edu.sjsu.cmpe.kidsontrack.dto.LinksDto;
 import edu.sjsu.cmpe.kidsontrack.dto.TeacherResponseDto;
 import edu.sjsu.cmpe.kidsontrack.dto.TeachersDto;
-import edu.sjsu.cmpe.kidsontrack.exception.HTTPClientException;
-import edu.sjsu.cmpe.kidsontrack.repository.TeacherRepository;
 import edu.sjsu.cmpe.kidsontrack.util.SequenceGenerator;
 
 @Path("/v1/teachers")
@@ -33,7 +31,6 @@ import edu.sjsu.cmpe.kidsontrack.util.SequenceGenerator;
 @Consumes(MediaType.APPLICATION_JSON)
 public class TeacherResource {
 
-	// @Autowired
 	private TeacherMgntDaoInterface teacherMgntDao = new TeacherMgntDao();
 
 	public TeacherResource() {
