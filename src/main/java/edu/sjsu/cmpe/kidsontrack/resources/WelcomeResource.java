@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 
 import edu.sjsu.cmpe.kidsontrack.views.WelcomeView;
 
-@Path("/")
+@Path("/welcome")
 @Produces(MediaType.TEXT_HTML)
 public class WelcomeResource {
 	
