@@ -37,7 +37,7 @@ public class LoginResource {
 			@FormParam("Password") String password) throws URISyntaxException {
 		URI uriLogin = new URI("http://localhost:9000/kidsontrack/register");
 		
-		if(teacherMgntDao.isFound(email, password)&&!studentMgntDao.isFound(email, password)) {
+		if(!studentMgntDao.isFound(email, password)&&teacherMgntDao.isFound(email, password)) {
 			System.out.println("Hello teacher");
 			String uid = teacherMgntDao.authenticate(email, password);
 			URI uriTeachers = new URI("http://localhost:9000/kidsontrack/teachers/" + uid);
