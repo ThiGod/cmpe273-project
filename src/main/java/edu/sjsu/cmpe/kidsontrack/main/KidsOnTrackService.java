@@ -11,6 +11,8 @@ import edu.sjsu.cmpe.kidsontrack.api.resources.RootResource;
 import edu.sjsu.cmpe.kidsontrack.api.resources.StudentResource;
 import edu.sjsu.cmpe.kidsontrack.api.resources.TeacherResource;
 import edu.sjsu.cmpe.kidsontrack.config.KidsOnTrackServiceConfiguration;
+import edu.sjsu.cmpe.kidsontrack.dao.TeacherMgntDao;
+import edu.sjsu.cmpe.kidsontrack.dao.TeacherMgntDaoInterface;
 import edu.sjsu.cmpe.kidsontrack.ui.resources.HomepageResource;
 import edu.sjsu.cmpe.kidsontrack.ui.resources.LoginResource;
 import edu.sjsu.cmpe.kidsontrack.ui.resources.RegisterResource;
@@ -42,10 +44,11 @@ public class KidsOnTrackService extends
 		environment.addResource(CourseResource.class);
 
 		/** GUI Side */
+		TeacherMgntDaoInterface teacherMgntDao = new TeacherMgntDao();
 		environment.addResource(LoginResource.class);
 		environment.addResource(HomepageResource.class);
 		environment.addResource(RegisterResource.class);
 		environment.addResource(StudentsResource.class);
-		environment.addResource(TeachersResource.class);
+		environment.addResource(new TeachersResource(teacherMgntDao));
 	}
 }

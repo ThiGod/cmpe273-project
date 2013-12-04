@@ -45,8 +45,27 @@
     </div>
 
 
-    <div class="container">
-
+	<div class="container">
+                <div class="jumbotron">
+                    <!-- calls getBooks() from HomeResource -->
+                    <table class="table table-hover">
+                    	<tr>
+                    		<td>User ID</td>
+                    		<td>First name</td>
+                    		<td>Last name</td>
+                    		<td>Email</td>
+                    	</tr>
+                    {{#teachers}}
+                        <tr>                           
+							<td id="userId">{{userId}}</td>
+							<td id="firstName">{{firstName}}</td>
+							<td id="lastName">{{lastName}}</td>
+							<td id="email">{{email}}</td>
+							<td><a class="btn btn-primary" role="button" href={{uderid}}>Say Hi</a></td>
+                        </tr>
+                    {{/teachers}}
+                    </table>
+                </div>
      
 
     </div> <!-- /container -->
