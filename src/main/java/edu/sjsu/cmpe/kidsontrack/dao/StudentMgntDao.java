@@ -6,6 +6,7 @@ import static org.springframework.data.mongodb.core.query.Update.update;
 import static org.springframework.data.mongodb.core.query.Query.query;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import com.mongodb.Mongo;
 
 import edu.sjsu.cmpe.kidsontrack.config.DBConfig;
+import edu.sjsu.cmpe.kidsontrack.domain.Course;
 import edu.sjsu.cmpe.kidsontrack.domain.Grade;
 import edu.sjsu.cmpe.kidsontrack.domain.Scores;
 import edu.sjsu.cmpe.kidsontrack.domain.Student;
@@ -145,6 +147,58 @@ public class StudentMgntDao implements StudentMgntDaoInterface{
 		return true;
 	}
 
+	
+	public List<Grade> getAllGrades(String studentId)
+	{
+		Student student = op.findById(studentId, Student.class);
+		
+		if(student == null)
+		{	
+			log.info("getAllGrades: student isn't found");
+			return null;	
+		}
+		
+		return student.getGrades();
+	}
+	
+	
+	public List<Course> getAllCourses(String studentId)
+	{
+		List<Course> courses = new ArrayList<Course>();
+		
+		Student student = op.findById(studentId, Student.class);
+		
+		String stdId = student.getUserId();
+		
+		Query query = Query.query(where("students").is(stdId));
+		List<Teacher> teachers = op.find(query, Teacher.class);
+		
+		int size = teachers.size();
+		
+		System.out.println("size of teacher:" + size);
+		
+		for(int i = 0; i < teachers.size(); i++)
+		{
+			courses = teachers.get(i).getCourses();
+		}
+		
+//		List<Grade> grades = student.getGrades();
+//		
+//		for(int i = 0; i < grades.size(); i++)
+//		{	
+//			String courseId = grades.get(i).getCourseId();
+//			
+//			Query query = Query.query(where("courses.courseId").is(courseId));
+//			
+////			Query query = Query.query(where("email").is(email))
+////					.addCriteria(where("password").is(pwd));
+//		
+////			List<Student> t = op.find(query, Student.class);
+//		
+//		}
+		return courses;
+	}
+	
 	
 	public boolean isFound(String email, String pwd)
 	{

@@ -3,6 +3,7 @@ package edu.sjsu.cmpe.kidsontrack.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.sjsu.cmpe.kidsontrack.domain.Course;
 import edu.sjsu.cmpe.kidsontrack.domain.Grade;
 import edu.sjsu.cmpe.kidsontrack.domain.Scores;
 import edu.sjsu.cmpe.kidsontrack.domain.Student;
@@ -29,6 +30,10 @@ public interface StudentMgntDaoInterface {
 	public void deleteStudentTable();
 	
 	public boolean addGrade(String studentId, Grade grade);
+	
+	public List<Grade> getAllGrades(String studentId);
+	
+	public List<Course> getAllCourses(String studentId);
 	
 	public boolean removeGrade(String studentId, Grade grade);
 	

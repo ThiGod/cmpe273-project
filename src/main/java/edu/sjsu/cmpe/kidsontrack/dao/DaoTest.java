@@ -163,8 +163,13 @@ public class DaoTest {
 //		boolean found = tDao.isFound(t2.getEmail(), t1.getPassword());
 //		System.out.println("match: " + found);
 		
-		boolean found = sDao.isFound(s2.getEmail(), s1.getPassword());
-		System.out.println("match: " + found);
+//		boolean found = sDao.isFound(s2.getEmail(), s1.getPassword());
+//		System.out.println("match: " + found);
+		
+		List<Course> c = sDao.getAllCourses(s2.getUserId());
+		
+		for(Course co: c)
+			System.out.println(co.toString());
 		
 	}
 
