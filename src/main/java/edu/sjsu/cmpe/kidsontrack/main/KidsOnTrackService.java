@@ -11,10 +11,10 @@ import edu.sjsu.cmpe.kidsontrack.api.resources.RootResource;
 import edu.sjsu.cmpe.kidsontrack.api.resources.StudentResource;
 import edu.sjsu.cmpe.kidsontrack.api.resources.TeacherResource;
 import edu.sjsu.cmpe.kidsontrack.config.KidsOnTrackServiceConfiguration;
-import edu.sjsu.cmpe.kidsontrack.resources.ExampleResource;
-import edu.sjsu.cmpe.kidsontrack.resources.HomepageResource;
-import edu.sjsu.cmpe.kidsontrack.resources.LoginResource;
-import edu.sjsu.cmpe.kidsontrack.resources.WelcomeResource;
+import edu.sjsu.cmpe.kidsontrack.ui.resources.ExampleResource;
+import edu.sjsu.cmpe.kidsontrack.ui.resources.HomepageResource;
+import edu.sjsu.cmpe.kidsontrack.ui.resources.LoginResource;
+import edu.sjsu.cmpe.kidsontrack.ui.resources.WelcomeResource;
 
 public class KidsOnTrackService extends
 		Service<KidsOnTrackServiceConfiguration> {

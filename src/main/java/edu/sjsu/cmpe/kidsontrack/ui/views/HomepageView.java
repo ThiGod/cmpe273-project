@@ -1,4 +1,4 @@
-package edu.sjsu.cmpe.kidsontrack.views;
+package edu.sjsu.cmpe.kidsontrack.ui.views;
 
 import com.yammer.dropwizard.views.View;
 
