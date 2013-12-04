@@ -39,12 +39,14 @@ public class LoginResource {
 		
 		if(teacherMgntDao.isFound(email, password)&&!studentMgntDao.isFound(email, password)) {
 			System.out.println("Hello teacher");
-			URI uriTeachers = new URI("http://localhost:8080/kidsontrack/teachers");
+			String uid = teacherMgntDao.authenticate(email, password);
+			URI uriTeachers = new URI("http://localhost:8080/kidsontrack/teachers/" + uid);
 			return Response.seeOther(uriTeachers).build();
 		}
 		if(!teacherMgntDao.isFound(email, password)&&studentMgntDao.isFound(email, password)) {
 			System.out.println("Hello Student");
-			URI uriStudents = new URI("http://localhost:8080/kidsontrack/students");
+			String uid = studentMgntDao.authenticate(email, password);
+			URI uriStudents = new URI("http://localhost:8080/kidsontrack/students/" + uid);
 			return Response.seeOther(uriStudents).build();
 		}
 		else {

@@ -32,7 +32,22 @@ public class StudentMgntDao implements StudentMgntDaoInterface{
 
 	private static final Log log = LogFactory.getLog(StudentMgntDao.class);
 	private  MongoOperations op = new DBConfig().getDB();;
-
+	
+	public String authenticate(String email, String pwd) {
+		Query query = Query.query(where("email").is(email)).addCriteria(where("password").is(pwd));
+		
+		List<Student> t = op.find(query, Student.class);
+		
+		System.out.println("size" + t.size());
+		
+		String uid = null;
+		
+		if(t.size() == 1) 
+			uid = t.get(0).getUserId();
+		
+		return uid;
+	}
+	
 	public Student addStudent(Student student)
 	{
 		op.save(student);

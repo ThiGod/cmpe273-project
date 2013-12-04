@@ -60,7 +60,22 @@ public class TeacherMgntDao implements TeacherMgntDaoInterface{
 		return people;
 
 	}
-
+	
+	public String authenticate(String email, String pwd) {
+		Query query = Query.query(where("email").is(email)).addCriteria(where("password").is(pwd));
+		
+		List<Teacher> t = op.find(query, Teacher.class);
+		
+		System.out.println("size" + t.size());
+		
+		String uid = null;
+		
+		if(t.size() == 1) 
+			uid = t.get(0).getUserId();
+		
+		return uid;
+	}
+	
 	public boolean isFound(String email, String pwd)
 	{
 		boolean found = false;

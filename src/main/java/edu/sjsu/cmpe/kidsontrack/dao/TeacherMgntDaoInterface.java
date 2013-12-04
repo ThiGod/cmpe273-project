@@ -59,5 +59,6 @@ public interface TeacherMgntDaoInterface {
 	public void removeAllCourses(String teacherId);
 	
 	public boolean isFound(String email, String pwd);
-		
+	
+	public String authenticate(String email, String pwd);
 }
