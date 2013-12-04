@@ -11,6 +11,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import edu.sjsu.cmpe.kidsontrack.dao.StudentMgntDao;
+import edu.sjsu.cmpe.kidsontrack.dao.StudentMgntDaoInterface;
 import edu.sjsu.cmpe.kidsontrack.dao.TeacherMgntDao;
 import edu.sjsu.cmpe.kidsontrack.dao.TeacherMgntDaoInterface;
 import edu.sjsu.cmpe.kidsontrack.domain.Student;
@@ -27,6 +29,7 @@ public class RegisterResource {
 	private Student student = new Student();
 	private Teacher teacher = new Teacher();
 	private TeacherMgntDaoInterface teacherMgntDao = new TeacherMgntDao();
+	private StudentMgntDaoInterface studentMgntDao = new StudentMgntDao();
 	
 	public RegisterResource() {
 		
@@ -40,7 +43,8 @@ public class RegisterResource {
 	@POST
 	public Response addNewUser(@FormParam("firstName") String firstName, @FormParam("lastName") String lastName, 
 			@FormParam("Email") String email, @FormParam("Password") String password,
-			@FormParam("role") int role) throws URISyntaxException {
+			@FormParam("Role") int role) throws URISyntaxException {
+		if(role==1) {
 			teacher.setEmail(email);
 			teacher.setFirstName(firstName);
 			teacher.setLastName(lastName);
@@ -54,5 +58,21 @@ public class RegisterResource {
 			URI uriTeachers = new URI("http://localhost:8080/kidsontrack/teachers/" + id);
 			
 			return Response.seeOther(uriTeachers).build();
+		}
+		else {
+			student.setEmail(email);
+			student.setFirstName(firstName);
+			student.setLastName(lastName);
+			student.setPassword(password);
+			student.setRole("Student");
+			
+			long id = SequenceGenerator.nextStudentId();
+			student.setUserId(String.valueOf(id));
+
+			studentMgntDao.addStudent(student);
+			URI uriStudents = new URI("http://localhost:8080/kidsontrack/students/" + id);
+			
+			return Response.seeOther(uriStudents).build();
+		}
 	}
 }

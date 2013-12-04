@@ -2,11 +2,10 @@ package edu.sjsu.cmpe.kidsontrack.ui.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
-import edu.sjsu.cmpe.kidsontrack.dao.StudentMgntDao;
-import edu.sjsu.cmpe.kidsontrack.dao.StudentMgntDaoInterface;
-import edu.sjsu.cmpe.kidsontrack.dao.TeacherMgntDao;
 import edu.sjsu.cmpe.kidsontrack.dao.TeacherMgntDaoInterface;
+import edu.sjsu.cmpe.kidsontrack.ui.views.TeacherView;
 import edu.sjsu.cmpe.kidsontrack.ui.views.TeachersView;
 
 @Path("/teachers")
@@ -24,7 +23,7 @@ public class TeachersResource {
 	
 	@GET
 	@Path("/{id}")
-	public TeachersView teacher() {
-		return new TeachersView(teacherMgntDao.findAllTeachers());
+	public TeacherView teacher(@PathParam("id") String id) {
+		return new TeacherView(teacherMgntDao.findTeacherById(id));
 	}
 }
