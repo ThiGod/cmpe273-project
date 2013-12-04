@@ -42,12 +42,13 @@
         <div class="navbar-collapse collapse">
           <form method="POST" action="" accept-charset="UTF-8" class="navbar-form navbar-right">
             <div class="form-group">
-              <input type="text" name="email" placeholder="Email" class="form-control">
+              <input type="text" id="Email" name="Email" placeholder="Email" class="form-control">
             </div>
             <div class="form-group">
-              <input type="password" name="password" placeholder="Password" class="form-control">
+              <input type="password" id="Password" name="Password" placeholder="Password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
+            <a class="btn btn-primary" role="button" href="http://localhost:8080/kidsontrack/register">Register</a>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
@@ -58,7 +59,7 @@
       <div class="container">
         <h1>Kids On Track</h1>
         <p>Kidsontrack.com is a simple website which provide an easy way for partents to comunicate with teachers.</p>
-        <p><a class="btn btn-primary btn-lg" role="button">Learn more »</a></p>
+        <p><a class="btn btn-primary btn-lg" role="button" href="http://localhost:8080/kidsontrack/">Learn more »</a></p>
       </div>
     </div>
 

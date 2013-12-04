@@ -49,7 +49,7 @@
       <div class="container">
         <h1>Kids On Track</h1>
         <p>Kidsontrack.com is a simple website which provide an easy way for partents to comunicate with teachers.</p>
-        <p><a class="btn btn-primary btn-lg" role="button">Learn more »</a></p>
+        <p><a class="btn btn-primary btn-lg" role="button" href="http://localhost:8080/kidsontrack/">Learn more »</a></p>
       </div>
     </div>
 
@@ -57,10 +57,14 @@
 
       <form method="POST" action="" accept-charset="UTF-8" class="form-signin">
         <h2 class="form-signin-heading">Please sign up</h2>
-        <input type="text" name="firstName" class="form-control" placeholder="First name" required="" autofocus="">
-        <input type="text" name="lastName" class="form-control" placeholder="Last name" required="" autofocus="">
-        <input type="text" name="email" class="form-control" placeholder="Email address" required="" autofocus="">
-        <input type="password" name="password" class="form-control" placeholder="Password" required="">
+        <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name" required="" autofocus="">
+        <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name" required="" autofocus="">
+        <input type="text" id="Email" name="Email" class="form-control" placeholder="Email address" required="" autofocus="">
+        <input type="password" id="Password" name="Password" class="form-control" placeholder="Password" required="">
+        <label>
+    		<input type="checkbox" id="Role" name="Role" value="1">
+    			I am a teacher.
+  		</label>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
       </form>
 

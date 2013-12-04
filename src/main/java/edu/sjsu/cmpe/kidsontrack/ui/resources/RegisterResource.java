@@ -33,7 +33,7 @@ public class RegisterResource {
 	/*
 	@POST
 	public Response addNewUser(@FormParam("firstName") String firstName, @FormParam("lastName") String lastName, 
-			@FormParam("email") String email, @FormParam("password") String password,
+			@FormParam("Email") String email, @FormParam("Password") String password,
 			@FormParam("role") int role) throws URISyntaxException {
 
 	}

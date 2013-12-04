@@ -34,8 +34,8 @@ public class HomepageResource {
 	}
 	
 	@POST
-	public Response verifyLogin(@FormParam("email") String email,
-			@FormParam("password") String password) throws URISyntaxException {
+	public Response verifyLogin(@FormParam("Email") String email,
+			@FormParam("Password") String password) throws URISyntaxException {
 		URI uriLogin = new URI("http://localhost:8080/kidsontrack/login");
 		URI uriTeachers = new URI("http://localhost:8080/kidsontrack/teachers");
 		URI uriStudents = new URI("http://localhost:8080/kidsontrack/students");

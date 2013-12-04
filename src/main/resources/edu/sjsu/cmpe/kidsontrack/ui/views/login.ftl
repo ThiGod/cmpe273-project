@@ -49,7 +49,7 @@
       <div class="container">
         <h1>Kids On Track</h1>
         <p>Kidsontrack.com is a simple website which provide an easy way for partents to comunicate with teachers.</p>
-        <p><a class="btn btn-primary btn-lg" role="button">Learn more »</a></p>
+        <p><a class="btn btn-primary btn-lg" role="button" href="http://localhost:8080/kidsontrack/">Learn more »</a></p>
       </div>
     </div>
 
@@ -57,8 +57,8 @@
 
       <form method="POST" action="" accept-charset="UTF-8" class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" name="email" class="form-control" placeholder="Email address" required="" autofocus="">
-        <input type="password" name="password" class="form-control" placeholder="Password" required="">
+        <input type="text" id="Email" name="Email" class="form-control" placeholder="Email address" required="" autofocus="">
+        <input type="password" id="Password" name="Password" class="form-control" placeholder="Password" required="">
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
