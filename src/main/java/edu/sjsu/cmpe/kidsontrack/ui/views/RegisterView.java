@@ -2,8 +2,8 @@ package edu.sjsu.cmpe.kidsontrack.ui.views;
 
 import com.yammer.dropwizard.views.View;
 
-public class HomepageView extends View {
-	public HomepageView() {
-		super("homepage.ftl");
+public class RegisterView extends View {
+	public RegisterView() {
+		super("register.ftl");
 	}
 }

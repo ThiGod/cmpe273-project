@@ -40,6 +40,15 @@
           <a class="navbar-brand" href="http://localhost:8080/kidsontrack/">KidsOnTrack</a>
         </div>
         <div class="navbar-collapse collapse">
+          <form method="POST" action="" accept-charset="UTF-8" class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" name="email" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
         </div><!--/.navbar-collapse -->
       </div>
     </div>
@@ -54,17 +63,30 @@
     </div>
 
     <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Easy</h2>
+          <p>Easy and friendly website make you easy to use. </p>
+          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Fast</h2>
+          <p>Want send teacher an email? Just one click to do that! </p>
+          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Security</h2>
+          <p>You data and information stored in security box and safe. </p>
+          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+        </div>
+      </div>
 
-      <form method="POST" action="" accept-charset="UTF-8" class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" name="email" class="form-control" placeholder="Email address" required="" autofocus="">
-        <input type="password" name="password" class="form-control" placeholder="Password" required="">
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
+      <hr>
 
+      <footer>
+        <p>© Company 2013</p>
+      </footer>
     </div> <!-- /container -->
 
 
