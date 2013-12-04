@@ -24,7 +24,7 @@ import com.mongodb.Mongo;
 import edu.sjsu.cmpe.kidsontrack.config.DBConfig;
 import edu.sjsu.cmpe.kidsontrack.domain.Course;
 import edu.sjsu.cmpe.kidsontrack.domain.Grade;
-import edu.sjsu.cmpe.kidsontrack.domain.Scores;
+import edu.sjsu.cmpe.kidsontrack.domain.Score;
 import edu.sjsu.cmpe.kidsontrack.domain.Student;
 import edu.sjsu.cmpe.kidsontrack.domain.Teacher;
 
@@ -411,7 +411,7 @@ public class TeacherMgntDao implements TeacherMgntDaoInterface{
 	}
 
 	
-	public boolean addScore(String teacherId, String studentId, String courseId, Scores score) {
+	public boolean addScore(String teacherId, String studentId, String courseId, Score score) {
 		Teacher teacher = op.findById(teacherId, Teacher.class);
 		
 		if(!teacher.foundCourse(courseId))
@@ -430,7 +430,7 @@ public class TeacherMgntDao implements TeacherMgntDaoInterface{
 	}
 	
 
-	public boolean removeScore(String teacherId, String studentId, String courseId, Scores score) {
+	public boolean removeScore(String teacherId, String studentId, String courseId, Score score) {
 		Teacher teacher = op.findById(teacherId, Teacher.class);
 		
 		if(!teacher.foundCourse(courseId))

@@ -11,6 +11,6 @@ $ java -jar target/kidsontrack.jar server config/dev_config.yml
 How to run this Java process forever
 $ nohup ./bin/dev.sh 0<&- &> /tmp/kidsontrackapp.log &
 
-Service endpoint: http://localhost:8080/kidsontrack/v1
+Service endpoint: http://localhost:9000/kidsontrack/v1
 
-Admin: http://localhost:8081/
+Admin: http://localhost:9001/

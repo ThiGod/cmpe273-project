@@ -1,11 +1,12 @@
 package edu.sjsu.cmpe.kidsontrack.domain;
 
-public class Scores {
+public class Score {
 
+	private String scoreId;
 	private String type;
 	private double point;
 	
-	public Scores()
+	public Score()
 	{
 		
 	}
@@ -24,6 +25,16 @@ public class Scores {
 
 	public void setPoint(double point) {
 		this.point = point;
+	}
+	
+	
+
+	public String getScoreId() {
+		return scoreId;
+	}
+
+	public void setScoreId(String scoreId) {
+		this.scoreId = scoreId;
 	}
 
 	public String toString()

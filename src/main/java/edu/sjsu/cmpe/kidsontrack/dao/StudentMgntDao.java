@@ -22,7 +22,7 @@ import com.mongodb.Mongo;
 import edu.sjsu.cmpe.kidsontrack.config.DBConfig;
 import edu.sjsu.cmpe.kidsontrack.domain.Course;
 import edu.sjsu.cmpe.kidsontrack.domain.Grade;
-import edu.sjsu.cmpe.kidsontrack.domain.Scores;
+import edu.sjsu.cmpe.kidsontrack.domain.Score;
 import edu.sjsu.cmpe.kidsontrack.domain.Student;
 import edu.sjsu.cmpe.kidsontrack.domain.Teacher;
 
@@ -233,7 +233,7 @@ public class StudentMgntDao implements StudentMgntDaoInterface{
 	}
 
 	@Override
-	public boolean addScore(String studentId, String courseId, Scores score) 
+	public boolean addScore(String studentId, String courseId, Score score) 
 	{
 		Student student = op.findById(studentId, Student.class);
 		
@@ -250,7 +250,7 @@ public class StudentMgntDao implements StudentMgntDaoInterface{
 	}
 
 	@Override
-	public boolean setScores(String studentId, String courseId, List<Scores> scores) 
+	public boolean setScores(String studentId, String courseId, List<Score> scores) 
 	{
 		Student student = op.findById(studentId, Student.class);
 		
@@ -268,7 +268,7 @@ public class StudentMgntDao implements StudentMgntDaoInterface{
 	
 	
 	@Override
-	public boolean removeScore(String studentId, String courseId, Scores score) 
+	public boolean removeScore(String studentId, String courseId, Score score) 
 	{
 		Student student = op.findById(studentId, Student.class);
 		

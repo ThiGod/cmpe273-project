@@ -6,7 +6,7 @@ import java.util.List;
 public class Grade {
 
 	private String courseId;
-	private List<Scores> scores = new ArrayList<Scores>();
+	private List<Score> scores = new ArrayList<Score>();
 	
 	
 	public Grade()
@@ -15,12 +15,12 @@ public class Grade {
 	}
 	
 	
-	public List<Scores> getScores() {
+	public List<Score> getScores() {
 		return scores;
 	}
 	
 	
-	public boolean setScores(List<Scores> scores) {
+	public boolean setScores(List<Score> scores) {
 		
 		if(scores.isEmpty())
 			return false;
@@ -30,13 +30,13 @@ public class Grade {
 	}
 	
 	
-	public boolean addScore(Scores score)
+	public boolean addScore(Score score)
 	{
 		return scores.add(score);
 	}
 	
 	
-	public boolean removeScore(Scores score)
+	public boolean removeScore(Score score)
 	{
 		return scores.remove(score);
 	}
@@ -69,7 +69,7 @@ public class Grade {
 	{
 		double total = 0;
 		
-		for(Scores sc: scores)
+		for(Score sc: scores)
 		{
 			total+= sc.getPoint();
 		}
@@ -96,7 +96,7 @@ public class Grade {
 	{
 		StringBuffer str = new StringBuffer("\n{ courseID: " + courseId + "\n");
 		str.append("scores: {\n");
-		for(Scores i: scores)
+		for(Score i: scores)
 			str.append(i.toString());
 		str.append(" }\n");
 		

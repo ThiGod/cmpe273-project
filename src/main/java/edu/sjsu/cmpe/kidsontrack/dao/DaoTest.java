@@ -4,7 +4,7 @@ import java.util.List;
 
 import edu.sjsu.cmpe.kidsontrack.domain.Course;
 import edu.sjsu.cmpe.kidsontrack.domain.Grade;
-import edu.sjsu.cmpe.kidsontrack.domain.Scores;
+import edu.sjsu.cmpe.kidsontrack.domain.Score;
 import edu.sjsu.cmpe.kidsontrack.domain.Student;
 import edu.sjsu.cmpe.kidsontrack.domain.Teacher;
 import edu.sjsu.cmpe.kidsontrack.domain.User;
@@ -41,7 +41,7 @@ public class DaoTest {
 	
 	public static Grade generateGrade(String type, String courseId)
 	{
-		Scores sc = generateScore(type, 10);
+		Score sc = generateScore(type, 10);
 		Grade g = new Grade();
 		
 		g.setCourseId(courseId);
@@ -51,9 +51,9 @@ public class DaoTest {
 		
 	}
 	
-	public static Scores generateScore(String type, double point)
+	public static Score generateScore(String type, double point)
 	{
-		Scores sc = new Scores();
+		Score sc = new Score();
 		
 		sc.setType(type);
 		sc.setPoint(10);
@@ -121,7 +121,7 @@ public class DaoTest {
 		g1.setCourseId(c1.getCourseId());
 		tDao.addGrade(t1.getUserId(),s2.getUserId(), g1);
 		
-		Scores sc = g1.getScores().get(0);
+		Score sc = g1.getScores().get(0);
 //		System.out.println(sc.getType());
 //		
 //		tDao.removeScore(t1.getUserId(),s2.getUserId(), c1.getCourseId(), sc);

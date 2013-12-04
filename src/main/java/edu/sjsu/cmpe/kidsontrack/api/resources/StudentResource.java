@@ -13,14 +13,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.xerox.amazonws.sns.NotificationService;
 import com.yammer.metrics.annotation.Timed;
 
 import edu.sjsu.cmpe.kidsontrack.dao.StudentMgntDao;
 import edu.sjsu.cmpe.kidsontrack.dao.StudentMgntDaoInterface;
 import edu.sjsu.cmpe.kidsontrack.dao.TeacherMgntDao;
 import edu.sjsu.cmpe.kidsontrack.dao.TeacherMgntDaoInterface;
+import edu.sjsu.cmpe.kidsontrack.domain.Course;
+import edu.sjsu.cmpe.kidsontrack.domain.Grade;
 import edu.sjsu.cmpe.kidsontrack.domain.Student;
 import edu.sjsu.cmpe.kidsontrack.domain.Teacher;
+import edu.sjsu.cmpe.kidsontrack.dto.CoursesDto;
+import edu.sjsu.cmpe.kidsontrack.dto.GradesDto;
 import edu.sjsu.cmpe.kidsontrack.dto.LinkDto;
 import edu.sjsu.cmpe.kidsontrack.dto.LinksDto;
 import edu.sjsu.cmpe.kidsontrack.dto.StudentDto;
@@ -36,15 +41,23 @@ public class StudentResource {
 	private StudentMgntDaoInterface studentMgntDao = new StudentMgntDao();
 
 	private TeacherMgntDaoInterface teacherMgntDao = new TeacherMgntDao();
+	
+	private NotificationService sns;
+	private String topicArn;
 
 	public StudentResource() {
 		// do nothing
+	}
+	
+	public StudentResource(NotificationService sns, String topicArn) {
+		this.sns = sns;
+		this.topicArn = topicArn;
 	}
 
 	@GET
 	@Path("/{id}")
 	@Timed(name = "view-student")
-	public StudentDto getStudent(@PathParam("teacherId") long teacherId,
+	public StudentDto getStudentById(@PathParam("teacherId") long teacherId,
 			@PathParam("id") long id) throws Exception {
 
 		Teacher teacher = teacherMgntDao.findTeacherById(String
@@ -64,6 +77,50 @@ public class StudentResource {
 
 		return reviewResponse;
 	}
+	
+	@GET
+	@Path("/{id}/courses")
+	@Timed(name = "view-student-courses")
+	public CoursesDto getAllCoursesForStudentById(@PathParam("teacherId") long teacherId,
+			@PathParam("id") long id) throws Exception {
+
+		Teacher teacher = teacherMgntDao.findTeacherById(String
+				.valueOf(teacherId));
+
+		if (null == teacher) {
+			throw new HTTPClientException("Teacher id does not match!");
+		}
+
+		List<Course> courses = studentMgntDao.getAllCourses(String
+				.valueOf(id));
+
+		CoursesDto response = new CoursesDto();
+		response.setCourses(courses);
+
+		return response;
+	}
+	
+	@GET
+	@Path("/{id}/scores")
+	@Timed(name = "view-all-scores")
+	public GradesDto getAllScores(@PathParam("teacherId") long teacherId, @PathParam("id") long id) throws Exception {
+
+		Teacher teacher = teacherMgntDao.findTeacherById(String
+				.valueOf(teacherId));
+
+		if (null == teacher) {
+			throw new HTTPClientException("Teacher id does not match!");
+		}
+
+		List<Grade> grades = studentMgntDao.getAllGrades(String
+				.valueOf(id));
+
+		GradesDto response = new GradesDto();
+		response.setGrades(grades);
+		
+		return response;
+	}
+
 
 	@GET
 	@Timed(name = "view-students")
@@ -109,6 +166,12 @@ public class StudentResource {
 				.addStudent(String.valueOf(teacherId), String.valueOf(id));
 
 		System.out.println("Add student: " + student + " to Teacher DB");
+		
+		String email = student.getEmail();
+		
+		System.out.println("Register email: " + email + " to kidsontrack topic in AWS SNS.");
+		
+		sns.subscribe(topicArn, "email", email);
 
 		LinksDto links = new LinksDto();
 		links.addLink(new LinkDto("view-student", "/teachers/"

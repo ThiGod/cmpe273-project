@@ -5,7 +5,7 @@ import java.util.List;
 
 import edu.sjsu.cmpe.kidsontrack.domain.Course;
 import edu.sjsu.cmpe.kidsontrack.domain.Grade;
-import edu.sjsu.cmpe.kidsontrack.domain.Scores;
+import edu.sjsu.cmpe.kidsontrack.domain.Score;
 import edu.sjsu.cmpe.kidsontrack.domain.Student;
 
 
@@ -37,11 +37,11 @@ public interface StudentMgntDaoInterface {
 	
 	public boolean removeGrade(String studentId, Grade grade);
 	
-	public boolean addScore(String studentId, String courseId, Scores score);
+	public boolean addScore(String studentId, String courseId, Score score);
 
-	public boolean setScores(String studentId, String courseId, List<Scores> scores); 
+	public boolean setScores(String studentId, String courseId, List<Score> scores); 
 		
-	public boolean removeScore(String studentId, String courseId, Scores score);
+	public boolean removeScore(String studentId, String courseId, Score score);
 	
 	public HashMap getTotalPoint(String studentId);
 	
