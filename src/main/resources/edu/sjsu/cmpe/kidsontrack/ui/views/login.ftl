@@ -40,6 +40,15 @@
           <a class="navbar-brand" href="http://localhost:8080/kidsontrack/">KidsOnTrack</a>
         </div>
         <div class="navbar-collapse collapse">
+        	<form method="POST" action="" accept-charset="UTF-8" class="navbar-form navbar-right">
+            <div class="form-group">
+            </div>
+            <div class="form-group">
+              
+            </div>
+            
+            <a class="btn btn-primary" role="button" href="http://localhost:8080/kidsontrack/register">Register</a>
+          </form>
         </div><!--/.navbar-collapse -->
       </div>
     </div>
