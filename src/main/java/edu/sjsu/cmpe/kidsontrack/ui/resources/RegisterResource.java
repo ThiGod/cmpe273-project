@@ -55,7 +55,7 @@ public class RegisterResource {
 			teacher.setUserId(String.valueOf(id));
 
 			teacherMgntDao.addTeacher(teacher);
-			URI uriTeachers = new URI("http://localhost:8080/kidsontrack/teachers/" + id);
+			URI uriTeachers = new URI("http://localhost:9000/kidsontrack/teachers/" + id);
 			
 			return Response.seeOther(uriTeachers).build();
 		}
@@ -70,7 +70,7 @@ public class RegisterResource {
 			student.setUserId(String.valueOf(id));
 
 			studentMgntDao.addStudent(student);
-			URI uriStudents = new URI("http://localhost:8080/kidsontrack/students/" + id);
+			URI uriStudents = new URI("http://localhost:9000/kidsontrack/students/" + id);
 			
 			return Response.seeOther(uriStudents).build();
 		}

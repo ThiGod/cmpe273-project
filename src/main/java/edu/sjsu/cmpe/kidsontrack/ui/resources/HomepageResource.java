@@ -36,16 +36,18 @@ public class HomepageResource {
 	@POST
 	public Response verifyLogin(@FormParam("Email") String email,
 			@FormParam("Password") String password) throws URISyntaxException {
-		URI uriLogin = new URI("http://localhost:8080/kidsontrack/login");
-		URI uriTeachers = new URI("http://localhost:8080/kidsontrack/teachers");
-		URI uriStudents = new URI("http://localhost:8080/kidsontrack/students");
+		URI uriLogin = new URI("http://localhost:9000/kidsontrack/register");
 		
 		if(teacherMgntDao.isFound(email, password)&&!studentMgntDao.isFound(email, password)) {
 			System.out.println("Hello teacher");
+			String uid = teacherMgntDao.authenticate(email, password);
+			URI uriTeachers = new URI("http://localhost:9000/kidsontrack/teachers/" + uid);
 			return Response.seeOther(uriTeachers).build();
 		}
 		if(!teacherMgntDao.isFound(email, password)&&studentMgntDao.isFound(email, password)) {
 			System.out.println("Hello Student");
+			String uid = studentMgntDao.authenticate(email, password);
+			URI uriStudents = new URI("http://localhost:9000/kidsontrack/students/" + uid);
 			return Response.seeOther(uriStudents).build();
 		}
 		else {
