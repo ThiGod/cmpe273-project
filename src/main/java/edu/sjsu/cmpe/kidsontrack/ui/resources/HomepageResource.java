@@ -36,7 +36,7 @@ public class HomepageResource {
 	@POST
 	public Response verifyLogin(@FormParam("Email") String email,
 			@FormParam("Password") String password) throws URISyntaxException {
-		URI uriLogin = new URI("http://54.215.205.33:8010/kidsontrack/register");
+		URI uriLogin = new URI("http://54.215.205.33:8010/kidsontrack/login");
 		
 		if(teacherMgntDao.isFound(email, password)&&!studentMgntDao.isFound(email, password)) {
 			System.out.println("Hello teacher");
