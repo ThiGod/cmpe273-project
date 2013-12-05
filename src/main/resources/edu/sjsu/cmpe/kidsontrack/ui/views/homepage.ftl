@@ -58,7 +58,7 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Kids On Track</h1>
-        <p>Kidsontrack.com is a simple website which provide an easy way for partents to comunicate with teachers.</p>
+        <p>Kidsontrack.com is a simple website which provide an easy way for parents to communicate with teachers.</p>
         <p><a class="btn btn-primary btn-lg" role="button" href="http://54.215.205.33:8010/kidsontrack/">Learn more »</a></p>
       </div>
     </div>
@@ -68,7 +68,7 @@
       <div class="row">
         <div class="col-md-4">
           <h2>Easy</h2>
-          <p>Easy and friendly website make you easy to use. </p>
+          <p>Easy and friendly website makes you easy to use. </p>
           <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
         </div>
         <div class="col-md-4">
