@@ -37,7 +37,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="http://localhost:9000/kidsontrack/">KidsOnTrack</a>
+          <a class="navbar-brand" href="http://54.215.205.33:8010/kidsontrack/">KidsOnTrack</a>
         </div>
         <div class="navbar-collapse collapse">
         </div><!--/.navbar-collapse -->
@@ -49,7 +49,7 @@
       <div class="container">
         <h1>Kids On Track</h1>
         <p>Kidsontrack.com is a simple website which provide an easy way for partents to comunicate with teachers.</p>
-        <p><a class="btn btn-primary btn-lg" role="button" href="http://localhost:9000/kidsontrack/">Learn more »</a></p>
+        <p><a class="btn btn-primary btn-lg" role="button" href="http://54.215.205.33:8010/kidsontrack/">Learn more »</a></p>
       </div>
     </div>
 

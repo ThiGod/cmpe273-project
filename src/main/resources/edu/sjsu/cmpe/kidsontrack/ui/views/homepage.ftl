@@ -37,7 +37,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="http://localhost:9000/kidsontrack/">KidsOnTrack</a>
+          <a class="navbar-brand" href="http://54.215.205.33:8010/kidsontrack/">KidsOnTrack</a>
         </div>
         <div class="navbar-collapse collapse">
           <form method="POST" action="" accept-charset="UTF-8" class="navbar-form navbar-right">
@@ -48,7 +48,7 @@
               <input type="password" id="Password" name="Password" placeholder="Password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
-            <a class="btn btn-primary" role="button" href="http://localhost:9000/kidsontrack/register">Register</a>
+            <a class="btn btn-primary" role="button" href="http://54.215.205.33:8010/kidsontrack/register">Register</a>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
@@ -59,7 +59,7 @@
       <div class="container">
         <h1>Kids On Track</h1>
         <p>Kidsontrack.com is a simple website which provide an easy way for partents to comunicate with teachers.</p>
-        <p><a class="btn btn-primary btn-lg" role="button" href="http://localhost:9000/kidsontrack/">Learn more »</a></p>
+        <p><a class="btn btn-primary btn-lg" role="button" href="http://54.215.205.33:8010/kidsontrack/">Learn more »</a></p>
       </div>
     </div>
 

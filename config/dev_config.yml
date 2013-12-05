@@ -1,7 +1,7 @@
 # AWS Access Id and Secret Key, please update the following two parameters with your own AWS id and key
-awsAccessId: AJF7PFROJACWPD
+awsAccessId: AKIAI25KLFCOKLO3TLIA
 
-awsSecretKey: BL6g7QoT+EqWxtEZapzFcYHPfZCCxFGEh8
+awsSecretKey: q0w/1ptK9Ap7TzKpmI1cRxCiCQjqjubECNnxcrXs
 
 
 # HTTP-specific options.
@@ -10,10 +10,10 @@ http:
   rootPath: /kidsontrack/*
 
   # The port on which the HTTP server listens for service requests.
-  port: 9000
+  port: 8010
 
   # The port on which the HTTP server listens for administrative requests.
-  adminPort: 9001
+  adminPort: 8011
 
 # Logging settings.
 logging:
